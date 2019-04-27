@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=2]
+[gd_scene load_steps=19 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://X Atlas.png" type="Texture" id=2]
@@ -12,9 +12,6 @@
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
-
-[sub_resource type="RayShape2D" id=2]
-custom_solver_bias = 0.5
 
 [sub_resource type="Animation" id=3]
 resource_name = "disabled"
@@ -141,13 +138,8 @@ zoom = Vector2( 1.5, 1.5 )
 limit_left = 0
 limit_top = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2( 0.291992, -12.1587 )
-scale = Vector2( 1, 1.76469 )
-shape = SubResource( 2 )
-
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -0.138023, 16.5036, -19.902, -24.8691, 19.3625, -24.6056 )
+polygon = PoolVector2Array( -11.9302, 14.8976, -12.382, -14.7002, 12.0192, -14.4742, 12.697, 14.6716 )
 
 [node name="ui" type="CanvasLayer" parent="."]
 layer = 0
