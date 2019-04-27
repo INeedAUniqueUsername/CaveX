@@ -56,6 +56,14 @@ var boost_fuel_left = 0;
 var boost_fuel_max = 120;
 var boosting_time = 0;
 
+# Use _input to toggle shooting mode
+# So that we don't need to query it every time
+func _input(event):
+	if event.is_action_pressed("shoot"):
+		self.shooting = true
+	if event.is_action_released("shoot"):
+		self.shooting = false
+
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -68,7 +76,6 @@ func _integrate_forces(s):
 	var move_right = Input.is_action_pressed("ui_right")
 	var boost_up = Input.is_action_pressed("ui_up")
 	var boost_down = Input.is_action_pressed("ui_down")
-	var shoot = Input.is_action_pressed("shoot")
 	var spawn = Input.is_action_pressed("spawn")
 	
 	if spawn:
@@ -81,7 +88,6 @@ func _integrate_forces(s):
 	if(abs(lv.length() - vel_prev.length()) / 30 > 30):
 		queue_free()
 	vel_prev = lv;
-	
 	
 	# Deapply prev floor velocity
 	lv.x -= floor_h_velocity
@@ -97,31 +103,19 @@ func _integrate_forces(s):
 			found_floor = true
 			floor_index = x
 	
-	
-	
 	# A good idea when implementing characters of all kinds,
 	# compensates for physics imprecision, as well as human reaction delay.
-	if shoot and not shooting:
-		shoot_time = 0
-		var bi = bullet.instance()
-		var ss
-		if siding_left:
-			ss = -1.0
-		else:
-			ss = 1.0
-		var pos = position + $bullet_shoot.position * Vector2(ss, 1.0)
-		
-		bi.position = pos
-		get_parent().add_child(bi)
-		
-		bi.linear_velocity = Vector2(800.0 * ss, -80)
-		
-		$sprite/smoke.restart()
-		$sound_shoot.play()
-		
-		add_collision_exception_with(bi) # Make bullet and this not collide
+	if shooting:
+		var bullet_middle = bullet.instance()
+		bullet_middle.position = position + $bullet_shoot.position * Vector2(0, 1.0)
+		bullet_middle.linear_velocity = Vector2(0, -3000)
+		get_parent().add_child(bullet_middle)
+		add_collision_exception_with(bullet_middle)
+		#$sprite/smoke.restart()
+		#$sound_shoot.play()
 	else:
 		shoot_time += step
+		
 	if found_floor:
 		airborne_time = 0.0
 	else:
@@ -229,8 +223,6 @@ func _integrate_forces(s):
 	if new_anim != anim:
 		anim = new_anim
 		$anim.play(anim)
-	
-	shooting = shoot
 	
 	# Apply floor velocity
 	if found_floor:
