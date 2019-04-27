@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://grenadier.gd" type="Script" id=1]
+[ext_resource path="res://grenadier.png" type="Texture" id=2]
+
+[node name="grenadier" type="RigidBody2D"]
+collision_layer = 2
+mode = 2
+gravity_scale = 0.0
+contacts_reported = 3
+contact_monitor = true
+can_sleep = false
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+autostart = true
+
+[connection signal="body_entered" from="." to="." method="_on_grenadier_body_entered"]
