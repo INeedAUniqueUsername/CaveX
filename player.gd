@@ -111,8 +111,8 @@ func _integrate_forces(s):
 		var bullet_middle = bullet.instance()
 		bullet_middle.position = position + $bullet_shoot.position * Vector2(0, 1.0)
 		bullet_middle.linear_velocity = Vector2(0, -3000)
-		get_parent().add_child(bullet_middle)
 		add_collision_exception_with(bullet_middle)
+		get_parent().call_deferred("add_child", bullet_middle)
 		#$sprite/smoke.restart()
 		#$sound_shoot.play()
 	else:
