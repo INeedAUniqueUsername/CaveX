@@ -87,8 +87,12 @@ func _integrate_forces(s):
 		e.position = p
 		get_parent().add_child(e)
 	
-	if(abs(lv.length() - vel_prev.length()) / 30 > 30):
+	if(abs(lv.length() - vel_prev.length()) / 30 > 20):
+		disable_time = 180;
+	elif(abs(lv.length() - vel_prev.length()) / 30 > 40):
 		queue_free()
+	if(disable_time > 0):
+		disable_time -= 1;
 	vel_prev = lv;
 	
 	# Deapply prev floor velocity
@@ -129,7 +133,7 @@ func _integrate_forces(s):
 	#The player can boost up
 	#The player must have high fuel to begin boosting
 	#If the player is already boosting and low on fuel, we let them continue
-	if(boost_fuel_left > 60 || (boost_fuel_left > 0 && boosting_time > 0) && (boost_up || boost_down)):
+	if((boost_up || boost_down) && disable_time == 0 && boost_fuel_left > 60 || (boost_fuel_left > 0 && boosting_time > 0)):
 		
 		#Acceleration from boosting
 		var accel = 30 * 1
@@ -156,13 +160,25 @@ func _integrate_forces(s):
 			boost_fuel_left += 1;
 		boosting_time = 0;
 	
+	if(disable_time > 0):
+		new_anim = "disabled"
+	elif !(boost_up || boost_down || move_left || move_right):
+		new_anim = "idle"
+	elif(boost_up):
+		new_anim = "up"
+	elif(boost_down):
+		new_anim = "down"
+	elif(move_left):
+		new_anim = "left"
+	elif(move_right):
+		new_anim = "right"
 	
 	if on_floor:
 		# Process logic when character is on floor
-		if move_left and not move_right:
+		if disable_time == 0 && move_left and not move_right:
 			if lv.x > -WALK_MAX_VELOCITY:
 				lv.x -= WALK_ACCEL * step
-		elif move_right and not move_left:
+		elif disable_time == 0 && move_right and not move_left:
 			if lv.x < WALK_MAX_VELOCITY:
 				lv.x += WALK_ACCEL * step
 		else:
@@ -172,29 +188,12 @@ func _integrate_forces(s):
 				xv = 0
 			lv.x = sign(lv.x) * xv
 		
-		# Check siding
-		if lv.x < 0 and move_left:
-			new_siding_left = true
-		elif lv.x > 0 and move_right:
-			new_siding_left = false
-		if jumping:
-			new_anim = "jumping"
-		elif abs(lv.x) < 0.1:
-			if shoot_time < MAX_SHOOT_POSE_TIME:
-				new_anim = "idle_weapon"
-			else:
-				new_anim = "idle"
-		else:
-			if shoot_time < MAX_SHOOT_POSE_TIME:
-				new_anim = "run_weapon"
-			else:
-				new_anim = "run"
 	else:
 		# Process logic when the character is in the air
-		if move_left and not move_right:
+		if move_left and not move_right && disable_time == 0:
 			if lv.x > -WALK_MAX_VELOCITY:
 				lv.x -= AIR_ACCEL * step
-		elif move_right and not move_left:
+		elif move_right and not move_left && disable_time == 0:
 			if lv.x < WALK_MAX_VELOCITY:
 				lv.x += AIR_ACCEL * step
 		#else:
@@ -204,17 +203,6 @@ func _integrate_forces(s):
 			#if xv < 0:
 			#	xv = 0
 			#lv.x = sign(lv.x) * xv
-		
-		if lv.y < 0:
-			if shoot_time < MAX_SHOOT_POSE_TIME:
-				new_anim = "jumping_weapon"
-			else:
-				new_anim = "jumping"
-		else:
-			if shoot_time < MAX_SHOOT_POSE_TIME:
-				new_anim = "falling_weapon"
-			else:
-				new_anim = "falling"
 	
 	# Update siding
 	if new_siding_left != siding_left:
