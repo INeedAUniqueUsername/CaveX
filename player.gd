@@ -46,7 +46,10 @@ var shoot_time = 1e20
 
 var MAX_SHOOT_POSE_TIME = 0.3
 
-var bullet = preload("res://bullet.tscn")
+var wave_up = load("res://wave_up.tscn")
+var wave_right = load("res://wave_right.tscn")
+var wave_down = load("res://wave_down.tscn")
+var wave_left = load("res://wave_left.tscn")
 
 var floor_h_velocity = 0.0
 onready var enemy = load("res://enemy.tscn")
@@ -57,10 +60,12 @@ var vel_prev = Vector2();
 var boost_fuel_left = 0;
 var boost_fuel_max = 120;
 var boosting_time = 0;
+var boost_wave_interval = 6;
 
 var shoot_cooldown = 0;
 
 const MAX_SHOOT_COOLDOWN = 10;
+var tick = 0;
 
 # Use _input to toggle shooting mode
 # So that we don't need to query it every time
@@ -69,8 +74,47 @@ func _input(event):
 		self.shooting = true
 	if event.is_action_released("shoot"):
 		self.shooting = false
-
+func boost_wave_time():
+	return tick%boost_wave_interval == 0
+	
+func boost_wave_up():
+	if boost_wave_time():
+		var wave = wave_up.instance()
+		var pos = position + $wave_up_source.position
+		wave.position = pos
+		get_parent().call_deferred("add_child", wave)
+		wave.linear_velocity = Vector2(0, self.linear_velocity.y) + Vector2(0, 320)
+		add_collision_exception_with(wave)
+		
+func boost_wave_down():
+	if boost_wave_time():
+		var wave = wave_down.instance()
+		var pos = position + $wave_down_source.position
+		wave.position = pos
+		get_parent().call_deferred("add_child", wave)
+		wave.linear_velocity = Vector2(0, self.linear_velocity.y) + Vector2(0, -320)
+		add_collision_exception_with(wave)
+		
+func boost_wave_right():
+	if boost_wave_time():
+		var wave = wave_right.instance()
+		var pos = position + $wave_right_source.position
+		wave.position = pos
+		get_parent().call_deferred("add_child", wave)
+		wave.linear_velocity = Vector2(self.linear_velocity.x, 0) + Vector2(-320, 0)
+		add_collision_exception_with(wave)
+		
+func boost_wave_left():
+	if boost_wave_time():
+		var wave = wave_left.instance()
+		var pos = position + $wave_left_source.position
+		wave.position = pos
+		get_parent().call_deferred("add_child", wave)
+		wave.linear_velocity = Vector2(self.linear_velocity.x, 0) + Vector2(320, 0)
+		add_collision_exception_with(wave)
+		return;
 func _integrate_forces(s):
+	tick += 1;
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
 	
@@ -147,18 +191,32 @@ func _integrate_forces(s):
 		if(boosting_time == 0):
 			fuel_used = 3;
 		
+		var boosted = false;
+		
 		if boost_up:
 			#Positive is down
 			if lv.y/30 > -8:
 				#Decrement speed until we reach max ascent speed at 4 pixels
 				lv.y -= accel
-				boost_fuel_left -= fuel_used;
+				#boost_fuel_left -= fuel_used;
+				boosted = true;
+				boost_wave_up()
 		if boost_down:
 			if lv.y/30 < 4:
 				#Accelerate down
 				lv.y += accel
-				boost_fuel_left -= fuel_used;
+				#boost_fuel_left -= fuel_used
+				boosted = true;
+				boost_wave_down()
+			elif lv.y/30 > 4:
+				#Decrement speed until we reach max ascent speed at 4 pixels
+				lv.y -= accel
+				#boost_fuel_left -= fuel_used;
+				boosted = true;
 		boosting_time += 1;
+		
+		#If we use both boosts simultaneously, then some fuel is free
+		if boosted: boost_fuel_left -= fuel_used
 	if boost_fuel_left < boost_fuel_max && !(boost_up || boost_down):
 		if on_floor:
 			boost_fuel_left += 3;
@@ -184,9 +242,13 @@ func _integrate_forces(s):
 		if disable_time == 0 && move_left and not move_right:
 			if lv.x > -WALK_MAX_VELOCITY:
 				lv.x -= WALK_ACCEL * step
+			boost_wave_left()
+				
 		elif disable_time == 0 && move_right and not move_left:
 			if lv.x < WALK_MAX_VELOCITY:
 				lv.x += WALK_ACCEL * step
+			boost_wave_right()
+				
 		else:
 			var xv = abs(lv.x)
 			xv -= WALK_DEACCEL * step
@@ -199,9 +261,11 @@ func _integrate_forces(s):
 		if move_left and not move_right && disable_time == 0:
 			if lv.x > -WALK_MAX_VELOCITY:
 				lv.x -= AIR_ACCEL * step
+				boost_wave_left()
 		elif move_right and not move_left && disable_time == 0:
 			if lv.x < WALK_MAX_VELOCITY:
 				lv.x += AIR_ACCEL * step
+				boost_wave_right()
 		#else:
 			
 			#var xv = abs(lv.x)
@@ -209,15 +273,6 @@ func _integrate_forces(s):
 			#if xv < 0:
 			#	xv = 0
 			#lv.x = sign(lv.x) * xv
-	
-	# Update siding
-	if new_siding_left != siding_left:
-		if new_siding_left:
-			$sprite.scale.x = -1
-		else:
-			$sprite.scale.x = 1
-		
-		siding_left = new_siding_left
 	
 	# Change animation
 	if new_anim != anim:
