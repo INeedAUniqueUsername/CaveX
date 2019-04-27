@@ -20,7 +20,7 @@ scale = 0.8
 
 [node name="blast" type="RigidBody2D"]
 collision_layer = 2
-mass = 5.0
+mass = 20.0
 physics_material_override = SubResource( 1 )
 gravity_scale = 0.5
 continuous_cd = 2
@@ -37,11 +37,9 @@ process_material = SubResource( 3 )
 texture = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]
-scale = Vector2( 0.5, 0.5 )
 texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-scale = Vector2( 0.5, 0.5 )
-polygon = PoolVector2Array( -2.90098, -1.75954, -2.20508, -10.4583, 1.97031, -10.4583, 2.31826, -1.52757, 9.85716, -4.0792, 11.249, -0.367743, 3.82604, 1.95192, 8.46536, 8.56295, 4.17399, 10.6507, 0.114582, 5.19945, -5.56859, 11.2306, -8.2362, 8.79492, -3.13294, 2.64782, -11.1358, -1.17962, -9.39603, -3.96322 )
+polygon = PoolVector2Array( -1.73725, -0.943172, -1.09227, -5.27376, 1.39552, -5.13555, 1.99443, -1.08138, 6.60144, -2.09492, 7.29249, 0.0243006, 3.82604, 1.95192, 5.40362, 5.50664, 3.10011, 7.30338, 0.114582, 5.19945, -3.21149, 7.71801, -4.77788, 6.28984, -3.13294, 2.64782, -6.8971, 0.0703707, -6.57461, -2.83205 )
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

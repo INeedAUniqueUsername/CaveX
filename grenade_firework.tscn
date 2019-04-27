@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://grenade.gd" type="Script" id=1]
-[ext_resource path="res://grenade.png" type="Texture" id=2]
+[ext_resource path="res://firework.png" type="Texture" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -10,15 +10,13 @@ blend_mode = 1
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, 0, 0 )
-initial_velocity = 1.0
-angular_velocity = 38.0
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 0.8
 
 [sub_resource type="CircleShape2D" id=3]
 
-[node name="grenade" type="RigidBody2D"]
+[node name="grenade_firework" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 3
 contacts_reported = 3
@@ -31,6 +29,7 @@ lifetime = 0.3
 speed_scale = 3.0
 local_coords = false
 process_material = SubResource( 2 )
+texture = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )

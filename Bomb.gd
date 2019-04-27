@@ -17,7 +17,7 @@ var vel_prev = Vector2(0, 0);
 func _integrate_forces(state):
 	
 	var lv = linear_velocity;
-	if(abs(lv.length() - vel_prev.length()) / 30 > 5):
+	if(abs(lv.length() - vel_prev.length()) / 30 > 10):
 		var sources = $Blasts.get_children()
 		for blast_source in sources:
 			var b = blast.instance()

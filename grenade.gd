@@ -1,11 +1,12 @@
 extends RigidBody2D
 
-var fuse = 30 * 0.5
-var fuse_countdown = false
+export var fuse = 30 * 0.5
+export var fuse_countdown = false
 
-onready var particle = load("res://enemy.tscn")
+onready var particle = load("res://blast.tscn")
 
-const ANGLES = [ 0, 60, 120, 180, 240, 300 ]
+const ANGLES = [ 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300 ]
+
 
 func _ready():
 	pass
@@ -20,10 +21,11 @@ func _process(delta):
 	fuse -= 1
 	if fuse <= 0: 
 		for angle in ANGLES:
-			var p = particle.instance()
-			var pos = position
-			pos.x += cos(PI * angle / 180)
-			pos.y += sin(PI * angle / 180)
-			p.position = pos
-			get_parent().call_deferred("add_child", p)
+			if rand_range(0, 2) != 2:
+				angle = angle + rand_range(0, 30)
+				var p = particle.instance()
+				var offset = Vector2(cos(PI * angle / 180), sin(PI * angle / 180));
+				p.position = position + offset * 8
+				p.linear_velocity = offset * rand_range(30*15, 30*30)
+				get_parent().call_deferred("add_child", p)
 		self.queue_free()

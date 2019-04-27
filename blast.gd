@@ -13,6 +13,9 @@ func _on_body_entered(body):
 	#if body is RigidBody2D:
 		#body.linear_velocity += linear_velocity;
 	if body.name == "player":
-		body.disable_time = 120
+		if body.disable_time > 0:
+			body.linear_velocity += vel_prev / 2;
+		else:
+			body.disable_time = 120
 	if linear_velocity.length() < 90:
 		queue_free()

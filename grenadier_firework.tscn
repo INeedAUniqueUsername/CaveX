@@ -1,18 +1,19 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://grenadier.gd" type="Script" id=1]
-[ext_resource path="res://grenade.tscn" type="PackedScene" id=2]
-[ext_resource path="res://grenadier.png" type="Texture" id=3]
+[ext_resource path="res://grenade_firework.tscn" type="PackedScene" id=2]
+[ext_resource path="res://grenadier_firework.png" type="Texture" id=3]
 
-[node name="grenadier" type="RigidBody2D"]
+[node name="grenadier_firework" type="RigidBody2D"]
 mode = 2
 contacts_reported = 3
 contact_monitor = true
 can_sleep = false
 script = ExtResource( 1 )
 ammo = ExtResource( 2 )
-angle_min = 60
-throw_speed = 400
+angle_min = 85
+angle_max = 95
+throw_speed = 1200
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
