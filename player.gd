@@ -58,6 +58,10 @@ var boost_fuel_left = 0;
 var boost_fuel_max = 120;
 var boosting_time = 0;
 
+var shoot_cooldown = 0;
+
+const MAX_SHOOT_COOLDOWN = 10;
+
 # Use _input to toggle shooting mode
 # So that we don't need to query it every time
 func _input(event):
@@ -112,15 +116,17 @@ func _integrate_forces(s):
 	# A good idea when implementing characters of all kinds,
 	# compensates for physics imprecision, as well as human reaction delay.
 	if shooting:
-		var bullet_middle = bullet.instance()
-		bullet_middle.position = position + $bullet_shoot.position * Vector2(-1.0 if move_left else 1.0 if move_right else 0.0, 1.0 if boost_down else -1.0 if boost_up else 0.0)
-		bullet_middle.linear_velocity = Vector2(-1000 if move_left else 1000 if move_right else 0, 3000 if boost_down else -3000 if boost_up else 0)
-		add_collision_exception_with(bullet_middle)
-		get_parent().call_deferred("add_child", bullet_middle)
-		#$sprite/smoke.restart()
-		#$sound_shoot.play()
-	else:
-		shoot_time += step
+		if shoot_cooldown <= 0:
+			shoot_cooldown = MAX_SHOOT_COOLDOWN
+			var bullet_middle = bullet.instance()
+			bullet_middle.position = position + $bullet_shoot.position * Vector2(-1.0 if move_left else 1.0 if move_right else 0.0, 1.0 if boost_down else -1.0 if boost_up else 0.0)
+			bullet_middle.linear_velocity = Vector2(-1000 if move_left else 1000 if move_right else 0, 3000 if boost_down else -3000 if boost_up else 0)
+			add_collision_exception_with(bullet_middle)
+			get_parent().call_deferred("add_child", bullet_middle)
+			#$sprite/smoke.restart()
+			#$sound_shoot.play()
+		else:
+			shoot_cooldown -= 1
 		
 	if found_floor:
 		airborne_time = 0.0
