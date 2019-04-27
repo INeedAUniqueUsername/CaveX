@@ -109,8 +109,8 @@ func _integrate_forces(s):
 	# compensates for physics imprecision, as well as human reaction delay.
 	if shooting:
 		var bullet_middle = bullet.instance()
-		bullet_middle.position = position + $bullet_shoot.position * Vector2(0, 1.0)
-		bullet_middle.linear_velocity = Vector2(0, -3000)
+		bullet_middle.position = position + $bullet_shoot.position * Vector2(-1.0 if move_left else 1.0 if move_right else 0.0, 1.0 if boost_down else -1.0 if boost_up else 0.0)
+		bullet_middle.linear_velocity = Vector2(-1000 if move_left else 1000 if move_right else 0, 3000 if boost_down else -3000 if boost_up else 0)
 		add_collision_exception_with(bullet_middle)
 		get_parent().call_deferred("add_child", bullet_middle)
 		#$sprite/smoke.restart()
