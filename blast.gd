@@ -2,13 +2,15 @@ extends RigidBody2D
 
 # Member variables
 var disabled = false
-
+export(float) var lifetime = 30
 
 var vel_prev = Vector2()
 func _integrate_forces(state):
 	vel_prev = linear_velocity;
 	pass
-
+func _process(delta):
+	lifetime -= delta;
+	
 func _on_body_entered(body):
 	#if body is RigidBody2D:
 		#body.linear_velocity += linear_velocity;
@@ -17,5 +19,5 @@ func _on_body_entered(body):
 			body.linear_velocity += vel_prev / 2;
 		else:
 			body.disable_time = 120
-	if linear_velocity.length() < 90:
+	if linear_velocity.length() < 90 || lifetime < 1:
 		queue_free()

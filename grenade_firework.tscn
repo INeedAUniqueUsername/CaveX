@@ -1,7 +1,10 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://grenade.gd" type="Script" id=1]
 [ext_resource path="res://firework.png" type="Texture" id=2]
+
+[sub_resource type="PhysicsMaterial" id=4]
+bounce = 0.5
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -19,9 +22,12 @@ scale = 0.8
 [node name="grenade_firework" type="RigidBody2D"]
 collision_layer = 2
 collision_mask = 3
+physics_material_override = SubResource( 4 )
 contacts_reported = 3
 contact_monitor = true
 script = ExtResource( 1 )
+fuse = 30.0
+fuse_countdown = true
 
 [node name="Particles2D" type="Particles2D" parent="."]
 material = SubResource( 1 )

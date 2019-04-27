@@ -13,16 +13,12 @@ script = ExtResource( 1 )
 ammo = ExtResource( 2 )
 angle_min = 85
 angle_max = 95
-throw_speed = 1200
+throw_speed = 800
 
 [node name="Sprite" type="Sprite" parent="."]
 texture = ExtResource( 3 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PoolVector2Array( -16, -16, 16, -16, 16, 16, -16, 16 )
-
-[node name="Timer" type="Timer" parent="."]
-wait_time = 10.0
-autostart = true
 
 [connection signal="body_entered" from="." to="." method="_on_grenadier_body_entered"]
