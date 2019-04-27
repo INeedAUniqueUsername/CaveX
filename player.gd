@@ -51,6 +51,10 @@ var bullet = preload("res://bullet.tscn")
 var floor_h_velocity = 0.0
 onready var enemy = load("res://enemy.tscn")
 
+var vel_prev = Vector2();
+var boost_fuel_left = 0;
+var boost_fuel_max = 120;
+var boosting_time = 0;
 
 func _integrate_forces(s):
 	var lv = s.get_linear_velocity()
@@ -60,9 +64,10 @@ func _integrate_forces(s):
 	var new_siding_left = siding_left
 	
 	# Get the controls
-	var move_left = Input.is_action_pressed("move_left")
-	var move_right = Input.is_action_pressed("move_right")
-	var jump = Input.is_action_pressed("jump")
+	var move_left = Input.is_action_pressed("ui_left")
+	var move_right = Input.is_action_pressed("ui_right")
+	var boost_up = Input.is_action_pressed("ui_up")
+	var boost_down = Input.is_action_pressed("ui_down")
 	var shoot = Input.is_action_pressed("shoot")
 	var spawn = Input.is_action_pressed("spawn")
 	
@@ -72,6 +77,11 @@ func _integrate_forces(s):
 		p.y = p.y - 100
 		e.position = p
 		get_parent().add_child(e)
+	
+	if(abs(lv.length() - vel_prev.length()) / 30 > 30):
+		queue_free()
+	vel_prev = lv;
+	
 	
 	# Deapply prev floor velocity
 	lv.x -= floor_h_velocity
@@ -86,9 +96,8 @@ func _integrate_forces(s):
 		if ci.dot(Vector2(0, -1)) > 0.6:
 			found_floor = true
 			floor_index = x
-			
-	if !found_floor:
-		
+	
+	
 	
 	# A good idea when implementing characters of all kinds,
 	# compensates for physics imprecision, as well as human reaction delay.
@@ -113,7 +122,6 @@ func _integrate_forces(s):
 		add_collision_exception_with(bi) # Make bullet and this not collide
 	else:
 		shoot_time += step
-	
 	if found_floor:
 		airborne_time = 0.0
 	else:
@@ -121,16 +129,34 @@ func _integrate_forces(s):
 	
 	var on_floor = airborne_time < MAX_FLOOR_AIRBORNE_TIME
 
-	# Process jump
-	if jumping:
-		if lv.y > 0:
-			# Set off the jumping flag if going down
-			jumping = false
-		elif not jump:
-			stopping_jump = true
+
+	#The player can boost up
+	#The player must have high fuel to begin boosting
+	#If the player is already boosting and low on fuel, we let them continue
+	if(boost_fuel_left > 60 || (boost_fuel_left > 0 && boosting_time > 0) && (boost_up || boost_down)):
 		
-		if stopping_jump:
-			lv.y += STOP_JUMP_FORCE * step
+		#Acceleration from boosting
+		var accel = 30 * 1
+		
+		if boost_up:
+			#Positive is down
+			if lv.y/30 > -8:
+				#Decrement speed until we reach max ascent speed at 4 pixels
+				lv.y -= accel
+				boost_fuel_left -= 2;
+		if boost_down:
+			if lv.y/30 < 4:
+				#Accelerate down
+				lv.y += accel
+				boost_fuel_left -= 2;
+		boosting_time += 1;
+	if boost_fuel_left < boost_fuel_max && !(boost_up || boost_down):
+		if on_floor:
+			boost_fuel_left += 3;
+		else:
+			boost_fuel_left += 1;
+		boosting_time = 0;
+	
 	
 	if on_floor:
 		# Process logic when character is on floor
@@ -146,13 +172,6 @@ func _integrate_forces(s):
 			if xv < 0:
 				xv = 0
 			lv.x = sign(lv.x) * xv
-		
-		# Check jump
-		if not jumping and jump:
-			lv.y = -JUMP_VELOCITY
-			jumping = true
-			stopping_jump = false
-			$sound_jump.play()
 		
 		# Check siding
 		if lv.x < 0 and move_left:
