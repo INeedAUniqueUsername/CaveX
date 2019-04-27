@@ -10,8 +10,8 @@ func _integrate_forces(state):
 	pass
 
 func _on_body_entered(body):
-	if body is RigidBody2D:
-		body.linear_velocity += linear_velocity;
+	#if body is RigidBody2D:
+		#body.linear_velocity += linear_velocity;
 	if body.name == "player":
 		body.disable_time = 120
 	if linear_velocity.length() < 90:
