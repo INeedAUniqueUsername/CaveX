@@ -51,6 +51,8 @@ var bullet = preload("res://bullet.tscn")
 var floor_h_velocity = 0.0
 onready var enemy = load("res://enemy.tscn")
 
+var disable_time = 0;
+
 var vel_prev = Vector2();
 var boost_fuel_left = 0;
 var boost_fuel_max = 120;
@@ -137,18 +139,21 @@ func _integrate_forces(s):
 		
 		#Acceleration from boosting
 		var accel = 30 * 1
+		var fuel_used = 2;
+		if(boosting_time == 0):
+			fuel_used = 3;
 		
 		if boost_up:
 			#Positive is down
 			if lv.y/30 > -8:
 				#Decrement speed until we reach max ascent speed at 4 pixels
 				lv.y -= accel
-				boost_fuel_left -= 2;
+				boost_fuel_left -= fuel_used;
 		if boost_down:
 			if lv.y/30 < 4:
 				#Accelerate down
 				lv.y += accel
-				boost_fuel_left -= 2;
+				boost_fuel_left -= fuel_used;
 		boosting_time += 1;
 	if boost_fuel_left < boost_fuel_max && !(boost_up || boost_down):
 		if on_floor:
@@ -198,12 +203,13 @@ func _integrate_forces(s):
 		elif move_right and not move_left:
 			if lv.x < WALK_MAX_VELOCITY:
 				lv.x += AIR_ACCEL * step
-		else:
-			var xv = abs(lv.x)
-			xv -= AIR_DEACCEL * step
-			if xv < 0:
-				xv = 0
-			lv.x = sign(lv.x) * xv
+		#else:
+			
+			#var xv = abs(lv.x)
+			#xv -= AIR_DEACCEL * step
+			#if xv < 0:
+			#	xv = 0
+			#lv.x = sign(lv.x) * xv
 		
 		if lv.y < 0:
 			if shoot_time < MAX_SHOOT_POSE_TIME:
