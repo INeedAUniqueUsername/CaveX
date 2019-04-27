@@ -57,7 +57,7 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
-[node name="Down Wave" type="RigidBody2D"]
+[node name="wave_down" type="RigidBody2D"]
 collision_layer = 2
 gravity_scale = 0.0
 continuous_cd = 2

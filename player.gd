@@ -50,6 +50,7 @@ var wave_up = load("res://wave_up.tscn")
 var wave_right = load("res://wave_right.tscn")
 var wave_down = load("res://wave_down.tscn")
 var wave_left = load("res://wave_left.tscn")
+var bullet = load("res://bullet.tscn")
 
 var floor_h_velocity = 0.0
 onready var enemy = load("res://enemy.tscn")
@@ -135,6 +136,7 @@ func _integrate_forces(s):
 		e.position = p
 		get_parent().add_child(e)
 	
+	#Fall damage
 	if(abs(lv.length() - vel_prev.length()) / 30 > 20):
 		disable_time = 180;
 	elif(abs(lv.length() - vel_prev.length()) / 30 > 40):
