@@ -50,6 +50,8 @@ var wave_right = load("res://wave_right.tscn")
 var wave_down = load("res://wave_down.tscn")
 var wave_left = load("res://wave_left.tscn")
 var bullet = load("res://bullet.tscn")
+var ground_enemy = load("res://enemy.tscn")
+var flying_enemy = load("res://flying_enemy.tscn")
 
 var floor_h_velocity = 0.0
 onready var enemy = load("res://enemy.tscn")
@@ -58,7 +60,7 @@ var disable_time = 0;
 
 var vel_prev = Vector2();
 var boost_fuel_left = 0;
-var boost_fuel_max = 120;
+var boost_fuel_max = 250;
 var boosting_time = 0;
 var boost_wave_interval = 6;
 
@@ -140,10 +142,15 @@ func _integrate_forces(s):
 	if(vDelta > 15 && vDelta < 30):
 		disable_time = 90;
 	elif(vDelta > 30):
-		mode = RigidBody2D.MODE_STATIC
-		
-		remove_child($CollisionPolygon2D)
-		remove_child($sprite)
+		for i in range(s.get_contact_count()):
+			var cc = s.get_contact_collider_object(i)
+			if cc is ground_enemy or cc is flying_enemy:
+				break
+			else:
+				mode = RigidBody2D.MODE_STATIC
+				
+				remove_child($CollisionPolygon2D)
+				remove_child($sprite)
 		
 		randomize()
 		for i in [ 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330 ]:
