@@ -17,7 +17,7 @@ _global_script_class_icons={
 
 config/name="Dynamic Character Control-Based Platformer"
 run/main_scene="res://intro.tscn"
-config/icon="res://icon.png"
+config/icon="res://X.png"
 
 [display]
 
