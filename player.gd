@@ -69,6 +69,13 @@ var shoot_cooldown = 0;
 const MAX_SHOOT_COOLDOWN = 10;
 var tick = 0;
 
+var respawn_position_history = Array()
+
+var dead = false
+
+func _ready():
+	respawn_position_history.push_back(position)
+
 # Use _input to toggle shooting mode
 # So that we don't need to query it every time
 func _input(event):
@@ -116,6 +123,37 @@ func boost_wave_left():
 		add_collision_exception_with(wave)
 		return;
 func _integrate_forces(s):
+	if dead:
+		# Find the floor (a contact with upwards facing collision normal)
+		var found_floor = false
+		var floor_index = -1
+		
+		for x in range(s.get_contact_count()):
+			var ci = s.get_contact_local_normal(x)
+			if ci.dot(Vector2(0, -1)) > 0.6:
+				found_floor = true
+				floor_index = x
+		
+		#Apply no-control physics
+		var lv = linear_velocity
+		var step = s.get_step()
+		var xv = abs(lv.x)
+		xv -= WALK_DEACCEL * step
+		if xv < 0:
+			xv = 0
+		lv.x = sign(lv.x) * xv
+		
+		# Apply floor velocity
+		if found_floor:
+			floor_h_velocity = s.get_contact_collider_velocity_at_position(floor_index).x
+			lv.x += floor_h_velocity
+		
+		# Finally, apply gravity and set back the linear velocity
+		lv += s.get_total_gravity() * step
+		s.set_linear_velocity(lv)
+		
+		return
+	
 	tick += 1;
 	var lv = s.get_linear_velocity()
 	var step = s.get_step()
@@ -128,42 +166,17 @@ func _integrate_forces(s):
 	var move_right = Input.is_action_pressed("ui_right")
 	var boost_up = Input.is_action_pressed("ui_up")
 	var boost_down = Input.is_action_pressed("ui_down")
-	var spawn = Input.is_action_pressed("spawn")
-	
-	if spawn:
-		var e = enemy.instance()
-		var p = position
-		p.y = p.y - 100
-		e.position = p
-		get_parent().add_child(e)
 	
 	#Fall damage
 	var vDelta = abs(lv.length() - vel_prev.length()) / 30;
 	if(vDelta > 15 && vDelta < 30):
-		disable_time = 90;
+		if disable_time > 0:
+			kill()
+		else:
+			disable_time = 90;
 	elif(vDelta > 30):
-		for i in range(s.get_contact_count()):
-			var cc = s.get_contact_collider_object(i)
-			if cc is ground_enemy or cc is flying_enemy:
-				break
-			else:
-				mode = RigidBody2D.MODE_STATIC
-				
-				remove_child($CollisionPolygon2D)
-				remove_child($sprite)
-				
-				get_tree().reload_current_scene()
-		
-		randomize()
-		for i in [ 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330 ]:
-			var g = gib.instance()
-			i += rand_range(0, 30)
-			g.position = position
-			g.linear_velocity = Vector2(cos(i), sin(i)) * 200
-			get_parent().call_deferred("add_child", g)
-			pass
+		kill()
 			
-		
 	if(disable_time > 0):
 		disable_time -= 1;
 	vel_prev = lv;
@@ -248,8 +261,9 @@ func _integrate_forces(s):
 		else:
 			boost_fuel_left += 1;
 		boosting_time = 0;
-	
-	if(disable_time > 0):
+	if dead:
+		new_anim = "dead"
+	elif(disable_time > 0):
 		new_anim = "disabled"
 	elif !(boost_up || boost_down || move_left || move_right):
 		new_anim = "idle"
@@ -263,6 +277,10 @@ func _integrate_forces(s):
 		new_anim = "right"
 	
 	if on_floor:
+		if !dead:
+			respawn_position_history.append(position)
+			if respawn_position_history.size() == 16:
+				respawn_position_history.pop_front()
 		# Process logic when character is on floor
 		if disable_time == 0 && move_left and not move_right:
 			if lv.x > -WALK_MAX_VELOCITY:
@@ -312,3 +330,24 @@ func _integrate_forces(s):
 	# Finally, apply gravity and set back the linear velocity
 	lv += s.get_total_gravity() * step
 	s.set_linear_velocity(lv)
+
+func kill():
+	if dead:
+		return
+	$death_timer.start()
+	randomize()
+	for i in rand_range(20, 30):
+		var g = gib.instance()
+		i += rand_range(0, 360)
+		g.position = position
+		g.linear_velocity = Vector2(cos(i), sin(i)) * rand_range(50, 200)
+		get_parent().call_deferred("add_child", g)
+		
+	disable_time = 240
+	dead = true
+func _on_respawn():
+	dead = false
+	disable_time = 0;
+	position = respawn_position_history[0]
+	respawn_position_history.pop_front()
+	pass # Replace with function body.

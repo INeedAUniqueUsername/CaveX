@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://player.gd" type="Script" id=1]
 [ext_resource path="res://X Atlas.png" type="Texture" id=2]
@@ -6,14 +6,27 @@
 [ext_resource path="res://osb_right.png" type="Texture" id=4]
 [ext_resource path="res://osb_jump.png" type="Texture" id=5]
 [ext_resource path="res://osb_fire.png" type="Texture" id=6]
-[ext_resource path="res://sound_shoot.wav" type="AudioStream" id=7]
-[ext_resource path="res://sound_jump.wav" type="AudioStream" id=8]
-[ext_resource path="res://X Trail.png" type="Texture" id=9]
+[ext_resource path="res://X Trail.png" type="Texture" id=7]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=10]
+resource_name = "dead"
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 5 ]
+}
+
+[sub_resource type="Animation" id=2]
 resource_name = "disabled"
 length = 0.2
 loop = true
@@ -30,7 +43,7 @@ tracks/0/keys = {
 "values": [ 0, 5 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=3]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -46,7 +59,7 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=4]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
@@ -61,7 +74,7 @@ tracks/0/keys = {
 "values": [ 0 ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=5]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -77,7 +90,7 @@ tracks/0/keys = {
 "values": [ 0, 4 ]
 }
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=6]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -93,7 +106,7 @@ tracks/0/keys = {
 "values": [ 0, 2 ]
 }
 
-[sub_resource type="Animation" id=8]
+[sub_resource type="Animation" id=7]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -109,9 +122,9 @@ tracks/0/keys = {
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=9]
+[sub_resource type="CanvasItemMaterial" id=8]
 
-[sub_resource type="ParticlesMaterial" id=10]
+[sub_resource type="ParticlesMaterial" id=9]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -98, 0 )
@@ -174,29 +187,24 @@ normal = ExtResource( 6 )
 action = "shoot"
 visibility_mode = 1
 
-[node name="sound_shoot" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 7 )
-
-[node name="sound_jump" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource( 8 )
-
 [node name="anim" type="AnimationPlayer" parent="."]
 playback_speed = 1.5
-anims/disabled = SubResource( 3 )
-anims/down = SubResource( 4 )
-anims/idle = SubResource( 5 )
-anims/left = SubResource( 6 )
-anims/right = SubResource( 7 )
-anims/up = SubResource( 8 )
+anims/dead = SubResource( 10 )
+anims/disabled = SubResource( 2 )
+anims/down = SubResource( 3 )
+anims/idle = SubResource( 4 )
+anims/left = SubResource( 5 )
+anims/right = SubResource( 6 )
+anims/up = SubResource( 7 )
 
 [node name="Trail" type="Particles2D" parent="."]
-material = SubResource( 9 )
+material = SubResource( 8 )
 z_index = -1
 amount = 2
 lifetime = 5.0
 local_coords = false
-process_material = SubResource( 10 )
-texture = ExtResource( 9 )
+process_material = SubResource( 9 )
+texture = ExtResource( 7 )
 
 [node name="wave_up_source" type="Node2D" parent="."]
 position = Vector2( 0, 8 )
@@ -210,3 +218,8 @@ position = Vector2( 8, 0 )
 [node name="wave_right_source" type="Node2D" parent="."]
 position = Vector2( -8, 0 )
 
+[node name="death_timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+
+[connection signal="timeout" from="death_timer" to="." method="_on_respawn"]
