@@ -151,6 +151,8 @@ func _integrate_forces(s):
 				
 				remove_child($CollisionPolygon2D)
 				remove_child($sprite)
+				
+				get_tree().reload_current_scene()
 		
 		randomize()
 		for i in [ 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330 ]:
