@@ -26,5 +26,5 @@ func _play():
 	pass
 	
 func _about():
-	get_tree().change_scene("res://about.tscn")
+	get_tree().change_scene("res://About.tscn")
 	pass
