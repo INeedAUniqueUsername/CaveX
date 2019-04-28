@@ -3,17 +3,6 @@ var wave_up = load("res://wave_up.tscn")
 var wave_down = load("res://wave_down.tscn")
 var wave_left = load("res://wave_left.tscn")
 var wave_right = load("res://wave_right.tscn")
-# Member variables
-var disabled = false
-
-func disable():
-	if disabled:
-		return
-	$anim.play("shutdown")
-	disabled = true
-
-func _ready():
-	$Timer.start()
 
 var vel_prev = Vector2()
 func _integrate_forces(state):
@@ -35,12 +24,12 @@ func _on_body_entered(body):
 			var left = wave_left.instance();
 			left.position = self.position + Vector2(-8, offset_y)
 			left.linear_velocity = Vector2(-120, 0)
-			add_collision_exception_with(get_parent())
+			#add_collision_exception_with(get_parent())
 			
 			var right = wave_right.instance()
 			right.position = self.position + Vector2(8, offset_y)
 			right.linear_velocity = Vector2(120, 0)
 			get_parent().call_deferred("add_child", left)
 			get_parent().call_deferred("add_child", right)
-			add_collision_exception_with(get_parent())
+			#add_collision_exception_with(get_parent())
 	queue_free()
