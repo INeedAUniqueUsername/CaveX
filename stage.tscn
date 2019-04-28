@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Bomb.tscn" type="PackedScene" id=2]
@@ -6,9 +6,12 @@
 [ext_resource path="res://WindFan.tscn" type="PackedScene" id=4]
 [ext_resource path="res://wind_left.tscn" type="PackedScene" id=5]
 [ext_resource path="res://background.tres" type="TileSet" id=6]
-[ext_resource path="res://grenadier_firework.tscn" type="PackedScene" id=7]
-[ext_resource path="res://grenadier.tscn" type="PackedScene" id=8]
-[ext_resource path="res://wave_right.tscn" type="PackedScene" id=9]
+[ext_resource path="res://Bridge.gd" type="Script" id=7]
+[ext_resource path="res://Floor.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Button.tscn" type="PackedScene" id=9]
+[ext_resource path="res://grenadier_firework.tscn" type="PackedScene" id=10]
+[ext_resource path="res://grenadier.tscn" type="PackedScene" id=11]
+[ext_resource path="res://wave_right.tscn" type="PackedScene" id=12]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -16,7 +19,7 @@ friction = 0.0
 [node name="stage" type="Node"]
 
 [node name="player" parent="." instance=ExtResource( 1 )]
-position = Vector2( 1695.08, 1193.28 )
+position = Vector2( 7860.63, 607.822 )
 physics_material_override = SubResource( 1 )
 
 [node name="Bomb" parent="." instance=ExtResource( 2 )]
@@ -102,7 +105,673 @@ __meta__ = {
 "_edit_lock_": true
 }
 
+[node name="Node" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 2210, 140 )
+
+[node name="Bridge" type="Node2D" parent="Node"]
+editor/display_folded = true
+position = Vector2( 6112.6, 564.773 )
+script = ExtResource( 7 )
+interval = 0.1
+
+[node name="Node2D" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -0.386261, 32.9393 )
+
+[node name="Node2D2" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -32.3863, 32.9393 )
+
+[node name="Node2D3" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -64.3863, 32.9393 )
+
+[node name="Node2D4" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -96.3863, 32.9393 )
+
+[node name="Node2D6" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -128.386, 32.9393 )
+
+[node name="Node2D7" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -160.386, 32.9393 )
+
+[node name="Node2D5" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -192.386, 32.9393 )
+
+[node name="Node2D8" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -224.386, 32.9393 )
+
+[node name="Node2D9" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -256.386, 32.9393 )
+
+[node name="Node2D10" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -288.386, 32.9393 )
+
+[node name="Node2D11" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -320.386, 32.9393 )
+
+[node name="Node2D12" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -352.386, 32.9393 )
+
+[node name="Node2D13" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -384.386, 32.9393 )
+
+[node name="Node2D14" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -416.386, 32.9393 )
+
+[node name="Node2D15" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -448.386, 32.9393 )
+
+[node name="Node2D16" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -480.386, 32.9393 )
+
+[node name="Node2D17" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -512.386, 32.9393 )
+
+[node name="Node2D18" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -544.386, 32.9393 )
+
+[node name="Node2D19" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -576.386, 32.9393 )
+
+[node name="Node2D20" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -608.386, 32.9393 )
+
+[node name="Node2D21" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -640.386, 32.9393 )
+
+[node name="Node2D22" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -672.386, 32.9393 )
+
+[node name="Node2D23" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -704.386, 32.9393 )
+
+[node name="Node2D24" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -736.386, 32.9393 )
+
+[node name="Node2D25" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -768.386, 32.9393 )
+
+[node name="Node2D26" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -800.386, 32.9393 )
+
+[node name="Node2D27" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -832.386, 32.9393 )
+
+[node name="Node2D28" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -864.386, 32.9393 )
+
+[node name="Node2D29" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -896.386, 32.9393 )
+
+[node name="Node2D30" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -928.386, 32.9393 )
+
+[node name="Node2D31" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -960.386, 32.9393 )
+
+[node name="Node2D32" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -992.386, 32.9393 )
+
+[node name="Node2D33" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1024.39, 32.9393 )
+
+[node name="Node2D34" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1056.39, 32.9393 )
+
+[node name="Node2D35" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1088.39, 32.9393 )
+
+[node name="Node2D36" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1120.39, 32.9393 )
+
+[node name="Node2D37" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1152.39, 32.9393 )
+
+[node name="Node2D38" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1184.39, 32.9393 )
+
+[node name="Node2D39" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1216.39, 32.9393 )
+
+[node name="Node2D40" parent="Node/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1248.39, 32.9393 )
+
+[node name="Button" parent="Node" instance=ExtResource( 9 )]
+position = Vector2( 6112.6, 564.773 )
+
+[node name="Node2" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 2210, 0 )
+
+[node name="Bridge" type="Node2D" parent="Node2"]
+editor/display_folded = true
+position = Vector2( 6112.6, 1134.77 )
+script = ExtResource( 7 )
+interval = 0.1
+
+[node name="Node2D" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -0.386261, 32.9393 )
+
+[node name="Node2D2" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -32.3863, 32.9393 )
+
+[node name="Node2D3" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -64.3863, 32.9393 )
+
+[node name="Node2D4" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -96.3863, 32.9393 )
+
+[node name="Node2D6" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -128.386, 32.9393 )
+
+[node name="Node2D7" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -160.386, 32.9393 )
+
+[node name="Node2D5" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -192.386, 32.9393 )
+
+[node name="Node2D8" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -224.386, 32.9393 )
+
+[node name="Node2D9" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -256.386, 32.9393 )
+
+[node name="Node2D10" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -288.386, 32.9393 )
+
+[node name="Node2D11" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -320.386, 32.9393 )
+
+[node name="Node2D12" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -352.386, 32.9393 )
+
+[node name="Node2D13" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -384.386, 32.9393 )
+
+[node name="Node2D14" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -416.386, 32.9393 )
+
+[node name="Node2D15" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -448.386, 32.9393 )
+
+[node name="Node2D16" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -480.386, 32.9393 )
+
+[node name="Node2D17" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -512.386, 32.9393 )
+
+[node name="Node2D18" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -544.386, 32.9393 )
+
+[node name="Node2D19" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -576.386, 32.9393 )
+
+[node name="Node2D20" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -608.386, 32.9393 )
+
+[node name="Node2D21" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -640.386, 32.9393 )
+
+[node name="Node2D22" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -672.386, 32.9393 )
+
+[node name="Node2D23" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -704.386, 32.9393 )
+
+[node name="Node2D24" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -736.386, 32.9393 )
+
+[node name="Node2D25" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -768.386, 32.9393 )
+
+[node name="Node2D26" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -800.386, 32.9393 )
+
+[node name="Node2D27" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -832.386, 32.9393 )
+
+[node name="Node2D28" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -864.386, 32.9393 )
+
+[node name="Node2D29" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -896.386, 32.9393 )
+
+[node name="Node2D30" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -928.386, 32.9393 )
+
+[node name="Node2D31" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -960.386, 32.9393 )
+
+[node name="Node2D32" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -992.386, 32.9393 )
+
+[node name="Node2D33" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1024.39, 32.9393 )
+
+[node name="Node2D34" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1056.39, 32.9393 )
+
+[node name="Node2D35" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1088.39, 32.9393 )
+
+[node name="Node2D36" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1120.39, 32.9393 )
+
+[node name="Node2D37" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1152.39, 32.9393 )
+
+[node name="Node2D38" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1184.39, 32.9393 )
+
+[node name="Node2D39" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1216.39, 32.9393 )
+
+[node name="Node2D40" parent="Node2/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1248.39, 32.9393 )
+
+[node name="Button" parent="Node2" instance=ExtResource( 9 )]
+position = Vector2( 6112.6, 1134.77 )
+
+[node name="Node3" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 2210, 0 )
+
+[node name="Bridge" type="Node2D" parent="Node3"]
+editor/display_folded = true
+position = Vector2( 6112.6, 1834.77 )
+script = ExtResource( 7 )
+interval = 0.1
+
+[node name="Node2D" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -0.386261, 32.9393 )
+
+[node name="Node2D2" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -32.3863, 32.9393 )
+
+[node name="Node2D3" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -64.3863, 32.9393 )
+
+[node name="Node2D4" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -96.3863, 32.9393 )
+
+[node name="Node2D6" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -128.386, 32.9393 )
+
+[node name="Node2D7" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -160.386, 32.9393 )
+
+[node name="Node2D5" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -192.386, 32.9393 )
+
+[node name="Node2D8" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -224.386, 32.9393 )
+
+[node name="Node2D9" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -256.386, 32.9393 )
+
+[node name="Node2D10" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -288.386, 32.9393 )
+
+[node name="Node2D11" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -320.386, 32.9393 )
+
+[node name="Node2D12" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -352.386, 32.9393 )
+
+[node name="Node2D13" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -384.386, 32.9393 )
+
+[node name="Node2D14" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -416.386, 32.9393 )
+
+[node name="Node2D15" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -448.386, 32.9393 )
+
+[node name="Node2D16" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -480.386, 32.9393 )
+
+[node name="Node2D17" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -512.386, 32.9393 )
+
+[node name="Node2D18" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -544.386, 32.9393 )
+
+[node name="Node2D19" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -576.386, 32.9393 )
+
+[node name="Node2D20" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -608.386, 32.9393 )
+
+[node name="Node2D21" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -640.386, 32.9393 )
+
+[node name="Node2D22" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -672.386, 32.9393 )
+
+[node name="Node2D23" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -704.386, 32.9393 )
+
+[node name="Node2D24" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -736.386, 32.9393 )
+
+[node name="Node2D25" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -768.386, 32.9393 )
+
+[node name="Node2D26" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -800.386, 32.9393 )
+
+[node name="Node2D27" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -832.386, 32.9393 )
+
+[node name="Node2D28" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -864.386, 32.9393 )
+
+[node name="Node2D29" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -896.386, 32.9393 )
+
+[node name="Node2D30" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -928.386, 32.9393 )
+
+[node name="Node2D31" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -960.386, 32.9393 )
+
+[node name="Node2D32" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -992.386, 32.9393 )
+
+[node name="Node2D33" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1024.39, 32.9393 )
+
+[node name="Node2D34" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1056.39, 32.9393 )
+
+[node name="Node2D35" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1088.39, 32.9393 )
+
+[node name="Node2D36" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1120.39, 32.9393 )
+
+[node name="Node2D37" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1152.39, 32.9393 )
+
+[node name="Node2D38" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1184.39, 32.9393 )
+
+[node name="Node2D39" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1216.39, 32.9393 )
+
+[node name="Node2D40" parent="Node3/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1248.39, 32.9393 )
+
+[node name="Button" parent="Node3" instance=ExtResource( 9 )]
+position = Vector2( 6112.6, 1834.77 )
+
+[node name="Node4" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 2210, 0 )
+
+[node name="Bridge" type="Node2D" parent="Node4"]
+editor/display_folded = true
+position = Vector2( 6112.6, 2644.77 )
+script = ExtResource( 7 )
+interval = 0.1
+
+[node name="Node2D" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -0.386261, 32.9393 )
+
+[node name="Node2D2" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -32.3863, 32.9393 )
+
+[node name="Node2D3" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -64.3863, 32.9393 )
+
+[node name="Node2D4" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -96.3863, 32.9393 )
+
+[node name="Node2D6" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -128.386, 32.9393 )
+
+[node name="Node2D7" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -160.386, 32.9393 )
+
+[node name="Node2D5" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -192.386, 32.9393 )
+
+[node name="Node2D8" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -224.386, 32.9393 )
+
+[node name="Node2D9" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -256.386, 32.9393 )
+
+[node name="Node2D10" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -288.386, 32.9393 )
+
+[node name="Node2D11" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -320.386, 32.9393 )
+
+[node name="Node2D12" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -352.386, 32.9393 )
+
+[node name="Node2D13" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -384.386, 32.9393 )
+
+[node name="Node2D14" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -416.386, 32.9393 )
+
+[node name="Node2D15" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -448.386, 32.9393 )
+
+[node name="Node2D16" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -480.386, 32.9393 )
+
+[node name="Node2D17" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -512.386, 32.9393 )
+
+[node name="Node2D18" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -544.386, 32.9393 )
+
+[node name="Node2D19" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -576.386, 32.9393 )
+
+[node name="Node2D20" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -608.386, 32.9393 )
+
+[node name="Node2D21" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -640.386, 32.9393 )
+
+[node name="Node2D22" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -672.386, 32.9393 )
+
+[node name="Node2D23" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -704.386, 32.9393 )
+
+[node name="Node2D24" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -736.386, 32.9393 )
+
+[node name="Node2D25" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -768.386, 32.9393 )
+
+[node name="Node2D26" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -800.386, 32.9393 )
+
+[node name="Node2D27" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -832.386, 32.9393 )
+
+[node name="Node2D28" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -864.386, 32.9393 )
+
+[node name="Node2D29" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -896.386, 32.9393 )
+
+[node name="Node2D30" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -928.386, 32.9393 )
+
+[node name="Node2D31" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -960.386, 32.9393 )
+
+[node name="Node2D32" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -992.386, 32.9393 )
+
+[node name="Node2D33" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1024.39, 32.9393 )
+
+[node name="Node2D34" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1056.39, 32.9393 )
+
+[node name="Node2D35" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1088.39, 32.9393 )
+
+[node name="Node2D36" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1120.39, 32.9393 )
+
+[node name="Node2D37" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1152.39, 32.9393 )
+
+[node name="Node2D38" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1184.39, 32.9393 )
+
+[node name="Node2D39" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1216.39, 32.9393 )
+
+[node name="Node2D40" parent="Node4/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1248.39, 32.9393 )
+
+[node name="Button" parent="Node4" instance=ExtResource( 9 )]
+position = Vector2( 6112.6, 2644.77 )
+
+[node name="Node5" type="Node2D" parent="."]
+editor/display_folded = true
+position = Vector2( 2210, 1040 )
+
+[node name="Bridge" type="Node2D" parent="Node5"]
+editor/display_folded = true
+position = Vector2( 6112.6, 2644.77 )
+script = ExtResource( 7 )
+interval = 0.1
+
+[node name="Node2D" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -0.386261, 32.9393 )
+
+[node name="Node2D2" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -32.3863, 32.9393 )
+
+[node name="Node2D3" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -64.3863, 32.9393 )
+
+[node name="Node2D4" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -96.3863, 32.9393 )
+
+[node name="Node2D6" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -128.386, 32.9393 )
+
+[node name="Node2D7" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -160.386, 32.9393 )
+
+[node name="Node2D5" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -192.386, 32.9393 )
+
+[node name="Node2D8" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -224.386, 32.9393 )
+
+[node name="Node2D9" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -256.386, 32.9393 )
+
+[node name="Node2D10" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -288.386, 32.9393 )
+
+[node name="Node2D11" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -320.386, 32.9393 )
+
+[node name="Node2D12" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -352.386, 32.9393 )
+
+[node name="Node2D13" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -384.386, 32.9393 )
+
+[node name="Node2D14" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -416.386, 32.9393 )
+
+[node name="Node2D15" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -448.386, 32.9393 )
+
+[node name="Node2D16" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -480.386, 32.9393 )
+
+[node name="Node2D17" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -512.386, 32.9393 )
+
+[node name="Node2D18" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -544.386, 32.9393 )
+
+[node name="Node2D19" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -576.386, 32.9393 )
+
+[node name="Node2D20" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -608.386, 32.9393 )
+
+[node name="Node2D21" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -640.386, 32.9393 )
+
+[node name="Node2D22" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -672.386, 32.9393 )
+
+[node name="Node2D23" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -704.386, 32.9393 )
+
+[node name="Node2D24" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -736.386, 32.9393 )
+
+[node name="Node2D25" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -768.386, 32.9393 )
+
+[node name="Node2D26" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -800.386, 32.9393 )
+
+[node name="Node2D27" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -832.386, 32.9393 )
+
+[node name="Node2D28" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -864.386, 32.9393 )
+
+[node name="Node2D29" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -896.386, 32.9393 )
+
+[node name="Node2D30" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -928.386, 32.9393 )
+
+[node name="Node2D31" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -960.386, 32.9393 )
+
+[node name="Node2D32" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -992.386, 32.9393 )
+
+[node name="Node2D33" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1024.39, 32.9393 )
+
+[node name="Node2D34" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1056.39, 32.9393 )
+
+[node name="Node2D35" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1088.39, 32.9393 )
+
+[node name="Node2D36" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1120.39, 32.9393 )
+
+[node name="Node2D37" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1152.39, 32.9393 )
+
+[node name="Node2D38" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1184.39, 32.9393 )
+
+[node name="Node2D39" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1216.39, 32.9393 )
+
+[node name="Node2D40" parent="Node5/Bridge" instance=ExtResource( 8 )]
+position = Vector2( -1248.39, 32.9393 )
+
+[node name="Button" parent="Node5" instance=ExtResource( 9 )]
+position = Vector2( 6112.6, 2644.77 )
+
 [node name="Tutorial" type="TileMap" parent="."]
+editor/display_folded = true
 position = Vector2( 1, 0 )
 tile_set = ExtResource( 3 )
 cell_size = Vector2( 32, 32 )
@@ -112,129 +781,122 @@ __meta__ = {
 "_edit_lock_": true
 }
 
-[node name="grenadier2" parent="Tutorial" instance=ExtResource( 7 )]
+[node name="grenadier2" parent="Tutorial" instance=ExtResource( 10 )]
 position = Vector2( 347.051, 1072.05 )
 angle_min = 80
 angle_max = 100
 throw_speed = 1200
 
-[node name="grenadier" parent="Tutorial" instance=ExtResource( 8 )]
+[node name="grenadier" parent="Tutorial" instance=ExtResource( 11 )]
 position = Vector2( 504.003, 841 )
 
 [node name="Bomb" parent="Tutorial" instance=ExtResource( 2 )]
 position = Vector2( 434.626, 1069.51 )
 
-[node name="grenadier_firework" parent="Tutorial" instance=ExtResource( 7 )]
+[node name="WindFan3" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 2097.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan4" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 2067.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan5" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 2037.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan6" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 2007.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan7" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1977.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan8" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1947.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan9" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1917.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan10" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1887.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan11" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1857.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan12" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1827.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan13" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1797.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan14" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1767.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan15" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1737.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan16" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1707.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan17" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1677.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="WindFan18" parent="Tutorial" instance=ExtResource( 4 )]
+position = Vector2( 1037.35, 1647.1 )
+wind = ExtResource( 12 )
+velocity = Vector2( 200, 0 )
+interval = 0.25
+
+[node name="grenadier_firework" parent="Tutorial" instance=ExtResource( 10 )]
 position = Vector2( 1067.75, 2255.24 )
 angle_min = 90
 angle_max = 90
 throw_speed = 1500
 
-[node name="WindFan" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -98.1409 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan2" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -128.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan3" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -158.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan4" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -188.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan5" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -218.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan6" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -248.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan7" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -278.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan8" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -308.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan9" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -338.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan10" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -368.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan11" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -398.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan12" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -428.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan13" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -458.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan14" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -488.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan15" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -518.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan16" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -548.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan17" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -578.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
-[node name="WindFan18" parent="Tutorial/grenadier_firework" instance=ExtResource( 4 )]
-position = Vector2( -30.3979, -608.141 )
-wind = ExtResource( 9 )
-velocity = Vector2( 300, 0 )
-interval = 0.25
-
+[connection signal="on_pressed" from="Node/Button" to="Node/Bridge" method="destroy"]
+[connection signal="on_pressed" from="Node2/Button" to="Node2/Bridge" method="destroy"]
+[connection signal="on_pressed" from="Node3/Button" to="Node3/Bridge" method="destroy"]
+[connection signal="on_pressed" from="Node4/Button" to="Node4/Bridge" method="destroy"]
+[connection signal="on_pressed" from="Node5/Button" to="Node5/Bridge" method="destroy"]
