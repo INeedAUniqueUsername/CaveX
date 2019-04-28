@@ -1,7 +1,7 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://enemy.gd" type="Script" id=1]
-[ext_resource path="res://enemy.png" type="Texture" id=2]
+[ext_resource path="res://Flyer.png" type="Texture" id=2]
 [ext_resource path="res://bullet.png" type="Texture" id=3]
 [ext_resource path="res://sound_hit.wav" type="AudioStream" id=4]
 [ext_resource path="res://sound_explode.wav" type="AudioStream" id=5]
@@ -13,36 +13,24 @@ friction = 0.0
 length = 6.0
 step = 0.0
 tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
+tracks/0/path = NodePath("Particles2D:emitting")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 4 ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("Particles2D:emitting")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
 "times": PoolRealArray( 3.47394 ),
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ true ]
 }
-tracks/2/type = "method"
-tracks/2/path = NodePath(".")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
 "times": PoolRealArray( 3.20357, 5.07305 ),
 "transitions": PoolRealArray( 1, 1 ),
 "values": [ {
@@ -53,13 +41,13 @@ tracks/2/keys = {
 "method": "_die"
 } ]
 }
-tracks/3/type = "value"
-tracks/3/path = NodePath("sprite:self_modulate")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
+tracks/2/type = "value"
+tracks/2/path = NodePath("sprite:self_modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
 "times": PoolRealArray( 3.55, 4.32 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 0,
@@ -70,35 +58,11 @@ tracks/3/keys = {
 length = 6.75
 loop = true
 step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.75, 1.5, 2.25, 3, 3.75, 4.5, 5.25, 6, 6.75 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 5, 6, 5, 6, 5, 6, 7, 6, 7, 5 ]
-}
 
 [sub_resource type="Animation" id=4]
 length = 1.25
 loop = true
 step = 0.25
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.25, 0.5, 0.75, 1, 1.25 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
-"update": 1,
-"values": [ 0, 1, 2, 3, 4, 0 ]
-}
 
 [sub_resource type="CircleShape2D" id=5]
 radius = 14.0
@@ -117,6 +81,7 @@ flag_disable_z = true
 spread = 180.0
 gravity = Vector3( 0, 98, 0 )
 initial_velocity = 322.73
+angular_velocity = 1.49184e-019
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 scale = 2.4
@@ -125,6 +90,7 @@ color_ramp = SubResource( 7 )
 [node name="flying_enemy" type="RigidBody2D"]
 mode = 2
 physics_material_override = SubResource( 1 )
+gravity_scale = 0.0
 contacts_reported = 4
 script = ExtResource( 1 )
 
@@ -140,8 +106,6 @@ anims/walk = SubResource( 4 )
 
 [node name="sprite" type="Sprite" parent="."]
 texture = ExtResource( 2 )
-hframes = 8
-frame = 4
 
 [node name="shape1" type="CollisionShape2D" parent="."]
 position = Vector2( -1.08072, -2.16144 )
@@ -180,3 +144,4 @@ stream = ExtResource( 4 )
 
 [node name="sound_explode" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource( 5 )
+
