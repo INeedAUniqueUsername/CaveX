@@ -13,4 +13,6 @@ func _ready():
 	$Timer.start()
 
 func _on_bullet_collision(body):
+	if body.name == "player":
+		body.disabled_time = 120
 	self.queue_free()
