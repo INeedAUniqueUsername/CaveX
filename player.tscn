@@ -13,7 +13,7 @@
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 
-[sub_resource type="Animation" id=2]
+[sub_resource type="Animation" id=3]
 resource_name = "disabled"
 length = 0.2
 loop = true
@@ -30,7 +30,7 @@ tracks/0/keys = {
 "values": [ 0, 5 ]
 }
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=4]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -46,7 +46,7 @@ tracks/0/keys = {
 "values": [ 0, 3 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=5]
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
@@ -59,22 +59,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=5]
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 4 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -90,7 +74,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 2 ]
+"values": [ 0, 4 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -106,16 +90,32 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
+"values": [ 0, 2 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=8]
+[sub_resource type="CanvasItemMaterial" id=9]
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=10]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -98, 0 )
-angular_velocity = 1.49184e-19
+angular_velocity = 1.49184e-019
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
@@ -142,7 +142,6 @@ limit_top = 0
 polygon = PoolVector2Array( -11.9302, 14.8976, -12.382, -14.7002, 12.0192, -14.4742, 12.697, 14.6716 )
 
 [node name="ui" type="CanvasLayer" parent="."]
-editor/display_folded = true
 layer = 0
 
 [node name="left" type="TouchScreenButton" parent="ui"]
@@ -183,20 +182,20 @@ stream = ExtResource( 8 )
 
 [node name="anim" type="AnimationPlayer" parent="."]
 playback_speed = 1.5
-anims/disabled = SubResource( 2 )
-anims/down = SubResource( 3 )
-anims/idle = SubResource( 4 )
-anims/left = SubResource( 5 )
-anims/right = SubResource( 6 )
-anims/up = SubResource( 7 )
+anims/disabled = SubResource( 3 )
+anims/down = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/left = SubResource( 6 )
+anims/right = SubResource( 7 )
+anims/up = SubResource( 8 )
 
 [node name="Trail" type="Particles2D" parent="."]
-material = SubResource( 8 )
+material = SubResource( 9 )
 z_index = -1
 amount = 2
 lifetime = 5.0
 local_coords = false
-process_material = SubResource( 9 )
+process_material = SubResource( 10 )
 texture = ExtResource( 9 )
 
 [node name="wave_up_source" type="Node2D" parent="."]
@@ -210,7 +209,4 @@ position = Vector2( 8, 0 )
 
 [node name="wave_right_source" type="Node2D" parent="."]
 position = Vector2( -8, 0 )
-
-[node name="bullet_shoot" type="Position2D" parent="."]
-position = Vector2( 31.243, 4.088 )
 

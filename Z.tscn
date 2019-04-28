@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Z.gd" type="Script" id=1]
+[ext_resource path="res://Z.png" type="Texture" id=2]
+
+[node name="Node2D" type="RigidBody2D"]
+mode = 2
+mass = 100.0
+gravity_scale = 0.5
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -108.992, 121.504, 57.4578, -117.914, -101.208, -120.309, -101.208, -150.246, 99.9683, -150.845, 99.3695, -109.532, -73.0673, 119.708, 110.147, 118.588, 109.548, 149.645, -108.992, 151.441 )
+
