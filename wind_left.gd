@@ -16,7 +16,9 @@ func _ready():
 	$Timer.start()
 
 var vel_prev = Vector2()
+var vel_prev2 = vel_prev
 func _integrate_forces(state):
+	vel_prev2 = vel_prev
 	vel_prev = linear_velocity;
 	pass
 
