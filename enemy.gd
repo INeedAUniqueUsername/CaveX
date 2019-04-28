@@ -29,7 +29,7 @@ func _pre_explode():
 	
 	# Stay there
 	mode = MODE_STATIC
-	$sound_explode.play()
+	#$sound_explode.play()
 
 
 func _integrate_forces(s):
@@ -55,7 +55,7 @@ func _integrate_forces(s):
 					s.set_angular_velocity(sign(dp.x) * 33.0)
 					set_friction(1)
 					cc.disable()
-					$sound_hit.play()
+					#$sound_hit.play()
 					break
 			
 			if dp.x > 0.9:
