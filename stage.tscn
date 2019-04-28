@@ -863,7 +863,6 @@ position = Vector2( -288.386, 32.9393 )
 position = Vector2( 3759.85, 3799.17 )
 
 [node name="Environment" type="Node" parent="."]
-editor/display_folded = true
 
 [node name="Background" type="TileMap" parent="Environment"]
 z_index = -10
@@ -989,7 +988,6 @@ angle_max = 90
 throw_speed = 1500
 
 [node name="Foreground" type="TileMap" parent="Environment"]
-editor/display_folded = true
 position = Vector2( 1, 0 )
 tile_set = ExtResource( 7 )
 cell_size = Vector2( 32, 32 )
@@ -1003,55 +1001,55 @@ __meta__ = {
 position = Vector2( 1420.24, 943.057 )
 wind = ExtResource( 11 )
 velocity = Vector2( -300, 0 )
-interval = 0.25
+interval = 0.4
 
 [node name="WindFan2" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1390.24, 975.057 )
 wind = ExtResource( 11 )
 velocity = Vector2( -300, 0 )
-interval = 0.25
+interval = 0.4
 
 [node name="WindFan3" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1390.24, 1167.06 )
 wind = ExtResource( 11 )
 velocity = Vector2( -300, 0 )
-interval = 0.25
+interval = 0.4
 
 [node name="WindFan4" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1420.24, 1197.06 )
 wind = ExtResource( 11 )
 velocity = Vector2( -300, 0 )
-interval = 0.25
+interval = 0.4
 
 [node name="WindFan6" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1360.24, 1137.06 )
 wind = ExtResource( 11 )
 velocity = Vector2( -300, 0 )
-interval = 0.25
+interval = 0.4
 
 [node name="WindFan7" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1330.24, 1107.06 )
 wind = ExtResource( 11 )
 velocity = Vector2( -300, 0 )
-interval = 0.25
+interval = 0.4
 
 [node name="WindFan8" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1300.24, 1067.06 )
 wind = ExtResource( 11 )
 velocity = Vector2( -300, 0 )
-interval = 0.25
+interval = 0.4
 
 [node name="WindFan9" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1330.24, 1037.06 )
 wind = ExtResource( 11 )
 velocity = Vector2( -300, 0 )
-interval = 0.25
+interval = 0.4
 
 [node name="WindFan10" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1360.24, 1007.06 )
 wind = ExtResource( 11 )
 velocity = Vector2( -300, 0 )
-interval = 0.25
+interval = 0.4
 
 [node name="Grenade Launchers" type="Node" parent="."]
 
@@ -1900,6 +1898,7 @@ position = Vector2( 8760.29, 9257.55 )
 
 [node name="Turrent11" parent="Turrets" instance=ExtResource( 15 )]
 position = Vector2( 19757.7, 15328.6 )
+
 [connection signal="on_pressed" from="Bridges and Buttons/Bridge1 and Button/Button" to="Bridges and Buttons/Bridge1 and Button/Bridge" method="destroy"]
 [connection signal="on_pressed" from="Bridges and Buttons/Bridge2 and Button/Button" to="Bridges and Buttons/Bridge2 and Button/Bridge" method="destroy"]
 [connection signal="on_pressed" from="Bridges and Buttons/Bridge3 and Button/Button" to="Bridges and Buttons/Bridge3 and Button/Bridge" method="destroy"]
