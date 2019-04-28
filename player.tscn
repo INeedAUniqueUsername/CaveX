@@ -120,7 +120,6 @@ orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
 [node name="player" type="RigidBody2D"]
-editor/display_folded = true
 mode = 2
 mass = 3.0
 physics_material_override = SubResource( 1 )
