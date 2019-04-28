@@ -3,7 +3,7 @@
 [ext_resource path="res://wind_left.gd" type="Script" id=1]
 [ext_resource path="res://Left Bracket.png" type="Texture" id=2]
 
-[sub_resource type="Animation" id=3]
+[sub_resource type="Animation" id=1]
 length = 1.5
 tracks/0/type = "method"
 tracks/0/path = NodePath(".")
@@ -52,7 +52,7 @@ wait_time = 0.5
 one_shot = true
 
 [node name="anim" type="AnimationPlayer" parent="."]
-anims/shutdown = SubResource( 3 )
+anims/shutdown = SubResource( 1 )
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="disable"]

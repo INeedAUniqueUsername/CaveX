@@ -59,9 +59,9 @@ uppercase = true
 
 [node name="Button" type="Button" parent="."]
 margin_left = 76.95
-margin_top = 399.95
+margin_top = 402.95
 margin_right = 220.95
-margin_bottom = 452.95
+margin_bottom = 455.95
 rect_pivot_offset = Vector2( 39, 7.19989 )
 theme = SubResource( 7 )
 text = "E[X]IT"
@@ -83,6 +83,7 @@ margin_bottom = 451.05
 rect_pivot_offset = Vector2( 39, 7.19989 )
 theme = SubResource( 7 )
 text = "ABOUT[Z]"
+
 [connection signal="pressed" from="Button" to="." method="_exit"]
 [connection signal="pressed" from="Button2" to="." method="_play"]
 [connection signal="pressed" from="Button3" to="." method="_about"]
