@@ -11,3 +11,6 @@ func disable():
 
 func _ready():
 	$Timer.start()
+
+func _on_bullet_collision(body):
+	self.queue_free()
