@@ -25,6 +25,8 @@ extends RigidBody2D
 #  for moving platforms.
 
 # Member variables
+var gib = load("res://Gib.tscn")
+
 var anim = ""
 var siding_left = false
 var jumping = false
@@ -134,10 +136,25 @@ func _integrate_forces(s):
 		get_parent().add_child(e)
 	
 	#Fall damage
-	if(abs(lv.length() - vel_prev.length()) / 30 > 20):
-		disable_time = 180;
-	elif(abs(lv.length() - vel_prev.length()) / 30 > 40):
-		queue_free()
+	var vDelta = abs(lv.length() - vel_prev.length()) / 30;
+	if(vDelta > 15 && vDelta < 30):
+		disable_time = 90;
+	elif(vDelta > 30):
+		mode = RigidBody2D.MODE_STATIC
+		
+		remove_child($CollisionPolygon2D)
+		remove_child($sprite)
+		
+		randomize()
+		for i in [ 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330 ]:
+			var g = gib.instance()
+			i += rand_range(0, 30)
+			g.position = position
+			g.linear_velocity = Vector2(cos(i), sin(i)) * 200
+			get_parent().call_deferred("add_child", g)
+			pass
+			
+		
 	if(disable_time > 0):
 		disable_time -= 1;
 	vel_prev = lv;

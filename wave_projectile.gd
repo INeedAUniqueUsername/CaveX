@@ -11,7 +11,7 @@ func _integrate_forces(state):
 
 func _on_body_entered(body):
 	if body is RigidBody2D:
-		body.linear_velocity += linear_velocity;
+		body.apply_impulse(linear_velocity.normalized(), vel_prev)
 	if body is TileMap:
 		if self.name == "wave_up" || self.name == "wave_down":
 			

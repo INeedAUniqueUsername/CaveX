@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Button.gd" type="Script" id=1]
+[ext_resource path="res://Button.png" type="Texture" id=2]
+
+[node name="Button" type="RigidBody2D"]
+mode = 2
+contacts_reported = 3
+contact_monitor = true
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+hframes = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( 1.78715, 0.399658, 2.27549, -11.687, 11.9204, -11.809, 11.9204, -14.9833, -12.3749, -15.1054, -12.3749, -12.0532, -2.24173, -12.0532, -2.11964, 14.8059, 2.1534, 14.8059 )
+
+[node name="ray" type="RayCast2D" parent="."]
+enabled = true
+cast_to = Vector2( 0, -16 )
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
