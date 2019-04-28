@@ -14,7 +14,7 @@ func _on_body_entered(body):
 		#body.linear_velocity += linear_velocity;
 	if body.name == "player":
 		if body.disable_time > 0:
-			body.linear_velocity += vel_prev / 2;
+			body.kill()
 		else:
 			body.disable_time = 120
 	if linear_velocity.length() < 90 || lifetime < 1:
