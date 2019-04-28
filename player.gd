@@ -50,8 +50,8 @@ var wave_right = load("res://wave_right.tscn")
 var wave_down = load("res://wave_down.tscn")
 var wave_left = load("res://wave_left.tscn")
 var bullet = load("res://bullet.tscn")
-var ground_enemy = load("res://enemy.tscn")
-var flying_enemy = load("res://flying_enemy.tscn")
+var ground_enemy = load("res://enemy.gd")
+var flying_enemy = load("res://flying_enemy.gd")
 
 var floor_h_velocity = 0.0
 onready var enemy = load("res://enemy.tscn")
