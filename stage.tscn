@@ -1,4 +1,4 @@
-[gd_scene load_steps=145 format=2]
+[gd_scene load_steps=146 format=2]
 
 [ext_resource path="res://player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Bomb.tscn" type="PackedScene" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://grenadier.tscn" type="PackedScene" id=12]
 [ext_resource path="res://flying_enemy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=14]
+[ext_resource path="res://turrent.tscn" type="PackedScene" id=15]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
@@ -426,6 +427,54 @@ position = Vector2( 882.058, 975.257 )
 [node name="Bomb4" parent="Bombs" instance=ExtResource( 2 )]
 position = Vector2( 435.626, 1069.51 )
 
+[node name="Bomb5" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 1798.62, 5581.14 )
+
+[node name="Bomb7" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 20202.2, 17826.9 )
+
+[node name="Bomb8" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 19416.3, 17884.6 )
+
+[node name="Bomb9" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 17062.2, 18151.4 )
+
+[node name="Bomb10" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 14661.3, 18980.5 )
+
+[node name="Bomb11" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 15047, 18886.8 )
+
+[node name="Bomb12" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 14549.5, 17899 )
+
+[node name="Bomb13" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 14974.9, 17877.4 )
+
+[node name="Bomb14" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 1285.39, 4439.1 )
+
+[node name="Bomb15" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 9358.68, 9896.27 )
+
+[node name="Bomb16" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 9327.92, 9313.92 )
+
+[node name="Bomb17" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 9182.33, 8885.36 )
+
+[node name="Bomb18" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 11714.7, 8717.22 )
+
+[node name="Bomb19" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 16683.2, 11809.4 )
+
+[node name="Bomb6" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 21518, 17603.4 )
+
+[node name="Bomb20" parent="Bombs" instance=ExtResource( 2 )]
+position = Vector2( 17343.7, 11806.1 )
+
 [node name="Bridges and Buttons" type="Node" parent="."]
 editor/display_folded = true
 
@@ -814,6 +863,7 @@ position = Vector2( -288.386, 32.9393 )
 position = Vector2( 3759.85, 3799.17 )
 
 [node name="Environment" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Background" type="TileMap" parent="Environment"]
 z_index = -10
@@ -1015,9 +1065,53 @@ throw_speed = 1200
 [node name="grenadier" parent="Grenade Launchers" instance=ExtResource( 12 )]
 position = Vector2( 505.003, 841 )
 
+[node name="grenadier_firework" parent="Grenade Launchers" instance=ExtResource( 10 )]
+position = Vector2( 221.237, 4902.5 )
+angle_min = 70
+angle_max = 70
+throw_speed = 1200
+
+[node name="grenadier3" parent="Grenade Launchers" instance=ExtResource( 12 )]
+position = Vector2( 2482.86, 4492.6 )
+angle_min = 150
+angle_max = 150
+throw_speed = 1200
+
+[node name="grenadier_firework2" parent="Grenade Launchers" instance=ExtResource( 10 )]
+position = Vector2( 4246.01, 4583.88 )
+angle_min = 45
+angle_max = 45
+throw_speed = 200
+
+[node name="grenadier4" parent="Grenade Launchers" instance=ExtResource( 12 )]
+position = Vector2( 2579.02, 3738.95 )
+angle_min = 30
+angle_max = 30
+throw_speed = 900
+
+[node name="grenadier5" parent="Grenade Launchers" instance=ExtResource( 12 )]
+position = Vector2( 1977.21, 5753.2 )
+angle_min = 10
+angle_max = 10
+throw_speed = 900
+
+[node name="grenadier6" parent="Grenade Launchers" instance=ExtResource( 12 )]
+position = Vector2( 6202.89, 5379.25 )
+angle_min = 150
+angle_max = 150
+throw_speed = 900
+
+[node name="grenadier7" parent="Grenade Launchers" instance=ExtResource( 12 )]
+position = Vector2( 4275.11, 5549.49 )
+angle_min = 80
+angle_max = 80
+throw_speed = 250
+
 [node name="Enemies" type="Node" parent="."]
+editor/display_folded = true
 
 [node name="Flying Enemies" type="Node" parent="Enemies"]
+editor/display_folded = true
 
 [node name="flying_enemy" parent="Enemies/Flying Enemies" instance=ExtResource( 13 )]
 position = Vector2( 1500.75, 834.059 )
@@ -1257,6 +1351,7 @@ position = Vector2( 14698.1, 19354.9 )
 position = Vector2( 15421.3, 19224.6 )
 
 [node name="Grounded Enemies" type="Node" parent="Enemies"]
+editor/display_folded = true
 
 [node name="enemy" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 1166.66, 2233.46 )
@@ -1777,48 +1872,41 @@ physics_material_override = SubResource( 130 )
 [node name="enemy130" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 18842.3, 17767.4 )
 
-[node name="grenadier_firework" parent="." instance=ExtResource( 10 )]
-position = Vector2( 221.237, 4902.5 )
-angle_min = 70
-angle_max = 70
-throw_speed = 1200
+[node name="Turrets" type="Node" parent="."]
+editor/display_folded = true
 
-[node name="grenadier" parent="." instance=ExtResource( 12 )]
-position = Vector2( 2482.86, 4492.6 )
-angle_min = 150
-angle_max = 150
-throw_speed = 1200
+[node name="Turrent" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 15251, 18920.6 )
 
-[node name="grenadier_firework2" parent="." instance=ExtResource( 10 )]
-position = Vector2( 4246.01, 4583.88 )
-angle_min = 45
-angle_max = 45
-throw_speed = 200
+[node name="Turrent2" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 14785.8, 17936.5 )
 
-[node name="grenadier2" parent="." instance=ExtResource( 12 )]
-position = Vector2( 2579.02, 3738.95 )
-angle_min = 30
-angle_max = 30
-throw_speed = 900
+[node name="Turrent3" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 19101.1, 17512 )
 
-[node name="grenadier3" parent="." instance=ExtResource( 12 )]
-position = Vector2( 1977.21, 5753.2 )
-angle_min = 10
-angle_max = 10
-throw_speed = 900
+[node name="Turrent4" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 21941.1, 15195.8 )
 
-[node name="grenadier5" parent="." instance=ExtResource( 12 )]
-position = Vector2( 6202.89, 5379.25 )
-angle_min = 150
-angle_max = 150
-throw_speed = 900
+[node name="Turrent5" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 14803.3, 9268.02 )
 
-[node name="grenadier4" parent="." instance=ExtResource( 12 )]
-position = Vector2( 4275.11, 5549.49 )
-angle_min = 80
-angle_max = 80
-throw_speed = 250
+[node name="Turrent6" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 6422.13, 4636.1 )
 
+[node name="Turrent7" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 573.932, 4539.25 )
+
+[node name="Turrent8" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 3826.39, 2978.6 )
+
+[node name="Turrent9" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 9234.14, 5329.51 )
+
+[node name="Turrent10" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 8760.29, 9257.55 )
+
+[node name="Turrent11" parent="Turrets" instance=ExtResource( 15 )]
+position = Vector2( 19757.7, 15328.6 )
 [connection signal="on_pressed" from="Bridges and Buttons/Bridge1 and Button/Button" to="Bridges and Buttons/Bridge1 and Button/Bridge" method="destroy"]
 [connection signal="on_pressed" from="Bridges and Buttons/Bridge2 and Button/Button" to="Bridges and Buttons/Bridge2 and Button/Bridge" method="destroy"]
 [connection signal="on_pressed" from="Bridges and Buttons/Bridge3 and Button/Button" to="Bridges and Buttons/Bridge3 and Button/Bridge" method="destroy"]
