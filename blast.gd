@@ -2,7 +2,7 @@ extends RigidBody2D
 
 # Member variables
 var disabled = false
-export(float) var lifetime = 30
+export(float) var lifetime = 1.5
 
 var vel_prev = Vector2()
 func _integrate_forces(state):
