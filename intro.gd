@@ -9,8 +9,14 @@ func _ready():
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
+func _input(ev):
+	if Input.is_key_pressed(KEY_X):
+		_exit()
+	elif Input.is_key_pressed(KEY_Y):
+		_play()
+	elif Input.is_key_pressed(KEY_Z):
+		_about()
+	
 func _exit():
 	get_tree().quit()
 	pass

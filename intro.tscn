@@ -83,7 +83,6 @@ margin_bottom = 451.05
 rect_pivot_offset = Vector2( 39, 7.19989 )
 theme = SubResource( 7 )
 text = "ABOUT[Z]"
-
 [connection signal="pressed" from="Button" to="." method="_exit"]
 [connection signal="pressed" from="Button2" to="." method="_play"]
 [connection signal="pressed" from="Button3" to="." method="_about"]
