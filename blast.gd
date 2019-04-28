@@ -1,7 +1,5 @@
 extends RigidBody2D
 
-# Member variables
-var disabled = false
 export(float) var lifetime = 30
 
 var vel_prev = Vector2()

@@ -42,9 +42,6 @@ var STOP_JUMP_FORCE = 900.0
 var MAX_FLOOR_AIRBORNE_TIME = 0.15
 
 var airborne_time = 1e20
-var shoot_time = 1e20
-
-var MAX_SHOOT_POSE_TIME = 0.3
 
 var wave_up = load("res://wave_up.tscn")
 var wave_right = load("res://wave_right.tscn")
