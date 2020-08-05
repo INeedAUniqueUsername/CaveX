@@ -1,13 +1,10 @@
 extends RigidBody2D
-
-export(NodePath) var player_path
-
 onready var bullet = load("res://bullet.tscn")
 
 var shoot_countdown = 100;
 var player
 func _ready():
-	player = get_node(player_path)
+	player = self.owner.get_node('player')
 
 func _process(delta):
 	if shoot_countdown < 100:

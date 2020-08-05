@@ -3,17 +3,14 @@ var wave_up = load("res://wave_up.tscn")
 var wave_down = load("res://wave_down.tscn")
 var wave_left = load("res://wave_left.tscn")
 var wave_right = load("res://wave_right.tscn")
-# Member variables
-var disabled = false
 
-func disable():
-	if disabled:
-		return
-	$anim.play("shutdown")
-	disabled = true
+var dead = false
 
 func _ready():
 	$Timer.start()
+
+func decay():
+	$anim.play('shutdown')
 
 var vel_prev = Vector2()
 var vel_prev2 = vel_prev
@@ -23,6 +20,9 @@ func _integrate_forces(state):
 	pass
 
 func _on_body_entered(body):
+	if dead:
+		return
+	dead = true
 	if body is RigidBody2D:
 		body.linear_velocity +=  vel_prev2;
 	if body is TileMap:
@@ -45,4 +45,5 @@ func _on_body_entered(body):
 			get_parent().call_deferred("add_child", left)
 			get_parent().call_deferred("add_child", right)
 			add_collision_exception_with(get_parent())
+	
 	queue_free()

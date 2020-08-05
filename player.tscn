@@ -11,7 +11,7 @@
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 
-[sub_resource type="Animation" id=10]
+[sub_resource type="Animation" id=2]
 resource_name = "dead"
 tracks/0/type = "value"
 tracks/0/path = NodePath("sprite:frame")
@@ -24,23 +24,6 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 1,
 "values": [ 5 ]
-}
-
-[sub_resource type="Animation" id=2]
-resource_name = "disabled"
-length = 0.2
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
-"update": 1,
-"values": [ 0, 5 ]
 }
 
 [sub_resource type="Animation" id=3]
@@ -56,25 +39,10 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 3 ]
+"values": [ 0, 5 ]
 }
 
 [sub_resource type="Animation" id=4]
-loop = true
-tracks/0/type = "value"
-tracks/0/path = NodePath("sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 1,
-"values": [ 0 ]
-}
-
-[sub_resource type="Animation" id=5]
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -87,7 +55,22 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 4 ]
+"values": [ 0, 3 ]
+}
+
+[sub_resource type="Animation" id=5]
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ 0 ]
 }
 
 [sub_resource type="Animation" id=6]
@@ -103,7 +86,7 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 0, 2 ]
+"values": [ 0, 4 ]
 }
 
 [sub_resource type="Animation" id=7]
@@ -119,20 +102,37 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
+"values": [ 0, 2 ]
+}
+
+[sub_resource type="Animation" id=8]
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
 "values": [ 0, 1 ]
 }
 
-[sub_resource type="CanvasItemMaterial" id=8]
+[sub_resource type="CanvasItemMaterial" id=9]
 
-[sub_resource type="ParticlesMaterial" id=9]
+[sub_resource type="ParticlesMaterial" id=10]
 flag_disable_z = true
 spread = 0.0
 gravity = Vector3( 0, -98, 0 )
-angular_velocity = 1.49184e-019
+angular_velocity = 1.49184e-19
 orbit_velocity = 0.0
 orbit_velocity_random = 0.0
 
 [node name="player" type="RigidBody2D"]
+collision_layer = 3
 mode = 2
 mass = 3.0
 physics_material_override = SubResource( 1 )
@@ -189,21 +189,21 @@ visibility_mode = 1
 
 [node name="anim" type="AnimationPlayer" parent="."]
 playback_speed = 1.5
-anims/dead = SubResource( 10 )
-anims/disabled = SubResource( 2 )
-anims/down = SubResource( 3 )
-anims/idle = SubResource( 4 )
-anims/left = SubResource( 5 )
-anims/right = SubResource( 6 )
-anims/up = SubResource( 7 )
+anims/dead = SubResource( 2 )
+anims/disabled = SubResource( 3 )
+anims/down = SubResource( 4 )
+anims/idle = SubResource( 5 )
+anims/left = SubResource( 6 )
+anims/right = SubResource( 7 )
+anims/up = SubResource( 8 )
 
 [node name="Trail" type="Particles2D" parent="."]
-material = SubResource( 8 )
+material = SubResource( 9 )
 z_index = -1
 amount = 2
 lifetime = 5.0
 local_coords = false
-process_material = SubResource( 9 )
+process_material = SubResource( 10 )
 texture = ExtResource( 7 )
 
 [node name="wave_up_source" type="Node2D" parent="."]
@@ -221,5 +221,4 @@ position = Vector2( -8, 0 )
 [node name="death_timer" type="Timer" parent="."]
 wait_time = 3.0
 one_shot = true
-
 [connection signal="timeout" from="death_timer" to="." method="_on_respawn"]
