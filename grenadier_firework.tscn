@@ -1,8 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://grenadier.gd" type="Script" id=1]
-[ext_resource path="res://grenade_firework.tscn" type="PackedScene" id=2]
-[ext_resource path="res://grenadier_firework.png" type="Texture" id=3]
+[ext_resource path="res://rocket.tscn" type="PackedScene" id=2]
+[ext_resource path="res://rocketeer.png" type="Texture" id=3]
+
+
 
 [node name="grenadier_firework" type="RigidBody2D"]
 mode = 2

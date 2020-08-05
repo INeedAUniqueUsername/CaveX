@@ -14,7 +14,7 @@ onready var rc_right = $raycast_right
 
 var WALK_SPEED = 50
 
-var bullet_class = preload("res://wave_projectile.gd")
+var bullet_class = preload("res://wave.gd")
 var player_class = preload("res://player.gd")
 
 

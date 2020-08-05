@@ -14,7 +14,7 @@ onready var rc_right = $raycast_right
 
 var WALK_SPEED = 50
 
-var bullet_class = preload("res://wave_projectile.gd")
+var wave_class = preload("res://wave.gd")
 
 
 func _die():
@@ -48,7 +48,7 @@ func _integrate_forces(s):
 			var dp = s.get_contact_local_normal(i)
 			
 			if cc:
-				if cc is bullet_class and not cc.disabled:
+				if cc is wave_class and not cc.dead:
 					mode = MODE_RIGID
 					state = STATE_DYING
 					#lv = s.get_contact_local_normal(i) * 400
@@ -65,13 +65,10 @@ func _integrate_forces(s):
 		
 		if wall_side != 0 and wall_side != direction:
 			direction = -direction
-			$sprite.scale.x = -direction
 		if direction < 0 and not rc_left.is_colliding() and rc_right.is_colliding():
 			direction = -direction
-			$sprite.scale.x = -direction
 		elif direction > 0 and not rc_right.is_colliding() and rc_left.is_colliding():
 			direction = -direction
-			$sprite.scale.x = -direction
 		
 		lv.x = direction * WALK_SPEED
 	

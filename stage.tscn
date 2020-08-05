@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=2]
+[gd_scene load_steps=150 format=2]
 
 [ext_resource path="res://player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Bomb.tscn" type="PackedScene" id=2]
@@ -10,23 +10,115 @@
 [ext_resource path="res://WindFan.tscn" type="PackedScene" id=8]
 [ext_resource path="res://wave_right.tscn" type="PackedScene" id=9]
 [ext_resource path="res://grenadier_firework.tscn" type="PackedScene" id=10]
-[ext_resource path="res://wind_left.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Left Bracket.png" type="Texture" id=11]
 [ext_resource path="res://grenadier.tscn" type="PackedScene" id=12]
 [ext_resource path="res://flying_enemy.tscn" type="PackedScene" id=13]
 [ext_resource path="res://enemy.tscn" type="PackedScene" id=14]
 [ext_resource path="res://turrent.tscn" type="PackedScene" id=15]
+[ext_resource path="res://wave_left.tscn" type="PackedScene" id=16]
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0
 
-[sub_resource type="PhysicsMaterial" id=2]
-friction = 0.0
+[sub_resource type="GDScript" id=2]
+script/source = "extends RigidBody2D
+var wave_up = load(\"res://wave_up.tscn\")
+var wave_down = load(\"res://wave_down.tscn\")
+var wave_left = load(\"res://wave_left.tscn\")
+var wave_right = load(\"res://wave_right.tscn\")
 
-[sub_resource type="PhysicsMaterial" id=3]
-friction = 0.0
+var dead = false
 
-[sub_resource type="PhysicsMaterial" id=4]
-friction = 0.0
+func _ready():
+	$Timer.start()
+
+func decay():
+	$anim.play(\"shutdown\")
+	pass
+
+var vel_prev = Vector2()
+var vel_prev2 = vel_prev
+func _integrate_forces(state):
+	vel_prev2 = vel_prev
+	vel_prev = linear_velocity;
+	pass
+
+func _on_body_entered(body):
+	if dead:
+		return
+		
+	dead = true
+	
+	if body is RigidBody2D:
+		var length2 = vel_prev2.dot(vel_prev2)
+		var projection = body.linear_velocity.dot(vel_prev2)
+		if projection < length2:
+			body.linear_velocity += vel_prev2.normalized() * 0.1
+	if body is TileMap:
+		if self.name == \"wave_up\" || self.name == \"wave_down\":
+			
+			var offset_y = 0
+			if self.name == \"wave_up\":
+				offset_y = -16
+			elif self.name == \"wave_down\":
+				offset_y = 16
+			
+			var left = wave_left.instance();
+			left.position = self.position + Vector2(-8, offset_y)
+			left.linear_velocity = Vector2(-120, 0)
+			add_collision_exception_with(get_parent())
+			
+			var right = wave_right.instance()
+			right.position = self.position + Vector2(8, offset_y)
+			right.linear_velocity = Vector2(120, 0)
+			get_parent().call_deferred(\"add_child\", left)
+			get_parent().call_deferred(\"add_child\", right)
+			add_collision_exception_with(get_parent())
+			
+	queue_free()
+"
+
+[sub_resource type="Animation" id=3]
+length = 1.5
+tracks/0/type = "method"
+tracks/0/path = NodePath(".")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 1 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "queue_free"
+} ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("sprite:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
+}
+
+[sub_resource type="PackedScene" id=4]
+_bundled = {
+"conn_count": 2,
+"conns": PoolIntArray( 0, 0, 22, 21, 2, 0, 3, 0, 24, 23, 2, 0 ),
+"editable_instances": [  ],
+"names": PoolStringArray( "wind_left", "collision_layer", "collision_mask", "gravity_scale", "continuous_cd", "contacts_reported", "contact_monitor", "script", "RigidBody2D", "sprite", "texture", "Sprite", "CollisionShape2D", "polygon", "CollisionPolygon2D", "Timer", "wait_time", "one_shot", "anim", "anims/shutdown", "AnimationPlayer", "_on_body_entered", "body_entered", "disable", "timeout" ),
+"node_count": 5,
+"node_paths": [  ],
+"nodes": PoolIntArray( -1, -1, 8, 0, -1, 7, 1, 0, 2, 1, 3, 2, 4, 0, 5, 1, 6, 3, 7, 4, 0, 0, 0, 11, 9, -1, 1, 10, 5, 0, 0, 0, 14, 12, -1, 1, 13, 6, 0, 0, 0, 15, 15, -1, 2, 16, 7, 17, 3, 0, 0, 0, 20, 18, -1, 1, 19, 8, 0 ),
+"variants": [ 2, 3, 0.0, true, SubResource( 2 ), ExtResource( 11 ), PoolVector2Array( 8.71537, -12.5453, 8.71537, -8.41627, -5.19108, -0.140347, 8.8285, 7.93014, 9.05474, 12.6248, -8.81884, 2.38707, -9.10165, -2.59039 ), 0.5, SubResource( 3 ) ],
+"version": 2
+}
 
 [sub_resource type="PhysicsMaterial" id=5]
 friction = 0.0
@@ -404,6 +496,15 @@ friction = 0.0
 friction = 0.0
 
 [sub_resource type="PhysicsMaterial" id=130]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=131]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=132]
+friction = 0.0
+
+[sub_resource type="PhysicsMaterial" id=133]
 friction = 0.0
 
 [node name="stage" type="Node"]
@@ -991,55 +1092,61 @@ __meta__ = {
 
 [node name="WindFan" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1420.24, 943.057 )
-wind = ExtResource( 11 )
+wind = SubResource( 4 )
 velocity = Vector2( -300, 0 )
 interval = 0.4
 
 [node name="WindFan2" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1390.24, 975.057 )
-wind = ExtResource( 11 )
+wind = SubResource( 4 )
 velocity = Vector2( -300, 0 )
 interval = 0.4
 
 [node name="WindFan3" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1390.24, 1167.06 )
-wind = ExtResource( 11 )
+wind = SubResource( 4 )
 velocity = Vector2( -300, 0 )
 interval = 0.4
 
 [node name="WindFan4" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1420.24, 1197.06 )
-wind = ExtResource( 11 )
+wind = SubResource( 4 )
 velocity = Vector2( -300, 0 )
 interval = 0.4
 
 [node name="WindFan6" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1360.24, 1137.06 )
-wind = ExtResource( 11 )
+wind = SubResource( 4 )
 velocity = Vector2( -300, 0 )
 interval = 0.4
 
 [node name="WindFan7" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1330.24, 1107.06 )
-wind = ExtResource( 11 )
+wind = SubResource( 4 )
 velocity = Vector2( -300, 0 )
 interval = 0.4
 
 [node name="WindFan8" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1300.24, 1067.06 )
-wind = ExtResource( 11 )
+wind = SubResource( 4 )
+velocity = Vector2( -300, 0 )
+interval = 0.4
+
+[node name="WindFan11" parent="Environment/Foreground" instance=ExtResource( 8 )]
+position = Vector2( 405.917, 882.485 )
+wind = ExtResource( 16 )
 velocity = Vector2( -300, 0 )
 interval = 0.4
 
 [node name="WindFan9" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1330.24, 1037.06 )
-wind = ExtResource( 11 )
+wind = SubResource( 4 )
 velocity = Vector2( -300, 0 )
 interval = 0.4
 
 [node name="WindFan10" parent="Environment/Foreground" instance=ExtResource( 8 )]
 position = Vector2( 1360.24, 1007.06 )
-wind = ExtResource( 11 )
+wind = SubResource( 4 )
 velocity = Vector2( -300, 0 )
 interval = 0.4
 
@@ -1335,519 +1442,519 @@ position = Vector2( 15421.3, 19224.6 )
 
 [node name="enemy" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 1166.66, 2233.46 )
-physics_material_override = SubResource( 2 )
+physics_material_override = SubResource( 5 )
 
 [node name="enemy2" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 1590, 2216.14 )
-physics_material_override = SubResource( 3 )
+physics_material_override = SubResource( 6 )
 
 [node name="enemy3" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 1112.89, 3110.88 )
-physics_material_override = SubResource( 4 )
+physics_material_override = SubResource( 7 )
 
 [node name="enemy4" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 1617.59, 3107.08 )
-physics_material_override = SubResource( 5 )
+physics_material_override = SubResource( 8 )
 
 [node name="enemy5" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 934.012, 4483.26 )
-physics_material_override = SubResource( 6 )
+physics_material_override = SubResource( 9 )
 
 [node name="enemy6" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 1521.11, 4396.53 )
-physics_material_override = SubResource( 7 )
+physics_material_override = SubResource( 10 )
 
 [node name="enemy7" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 2015.77, 4432.79 )
-physics_material_override = SubResource( 8 )
+physics_material_override = SubResource( 11 )
 
 [node name="enemy8" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3058.69, 4545.89 )
-physics_material_override = SubResource( 9 )
+physics_material_override = SubResource( 12 )
 
 [node name="enemy9" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3058.69, 3672.84 )
-physics_material_override = SubResource( 10 )
+physics_material_override = SubResource( 13 )
 
 [node name="enemy10" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 2288, 3702.94 )
-physics_material_override = SubResource( 11 )
+physics_material_override = SubResource( 14 )
 
 [node name="enemy11" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 2727.53, 3136.96 )
-physics_material_override = SubResource( 12 )
+physics_material_override = SubResource( 15 )
 
 [node name="enemy12" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3383.55, 2970.06 )
-physics_material_override = SubResource( 13 )
+physics_material_override = SubResource( 16 )
 
 [node name="enemy13" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4130.44, 3010.52 )
-physics_material_override = SubResource( 14 )
+physics_material_override = SubResource( 17 )
 
 [node name="enemy14" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4455.57, 2962.35 )
-physics_material_override = SubResource( 15 )
+physics_material_override = SubResource( 18 )
 
 [node name="enemy15" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4798.77, 2902.14 )
-physics_material_override = SubResource( 16 )
+physics_material_override = SubResource( 19 )
 
 [node name="enemy16" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4774.69, 2769.68 )
-physics_material_override = SubResource( 17 )
+physics_material_override = SubResource( 20 )
 
 [node name="enemy17" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4311.07, 2799.78 )
-physics_material_override = SubResource( 18 )
+physics_material_override = SubResource( 21 )
 
 [node name="enemy18" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6816.44, 4544.3 )
-physics_material_override = SubResource( 19 )
+physics_material_override = SubResource( 22 )
 
 [node name="enemy19" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6684.16, 5337.99 )
-physics_material_override = SubResource( 20 )
+physics_material_override = SubResource( 23 )
 
 [node name="enemy20" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6357.34, 5369.12 )
-physics_material_override = SubResource( 21 )
+physics_material_override = SubResource( 24 )
 
 [node name="enemy21" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 1325.06, 5508.98 )
-physics_material_override = SubResource( 22 )
+physics_material_override = SubResource( 25 )
 
 [node name="enemy22" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 1815.15, 5291.17 )
-physics_material_override = SubResource( 23 )
+physics_material_override = SubResource( 26 )
 
 [node name="enemy23" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 2250.79, 5554.36 )
-physics_material_override = SubResource( 24 )
+physics_material_override = SubResource( 27 )
 
 [node name="enemy24" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3085.76, 6380.26 )
-physics_material_override = SubResource( 25 )
+physics_material_override = SubResource( 28 )
 
 [node name="enemy25" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4225.78, 6355.91 )
-physics_material_override = SubResource( 26 )
+physics_material_override = SubResource( 29 )
 
 [node name="enemy26" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6162.89, 7322.8 )
-physics_material_override = SubResource( 27 )
+physics_material_override = SubResource( 30 )
 
 [node name="enemy27" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6457.18, 7333.78 )
-physics_material_override = SubResource( 28 )
+physics_material_override = SubResource( 31 )
 
 [node name="enemy28" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4701.22, 8387.74 )
-physics_material_override = SubResource( 29 )
+physics_material_override = SubResource( 32 )
 
 [node name="enemy29" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4455.23, 8256.65 )
-physics_material_override = SubResource( 30 )
+physics_material_override = SubResource( 33 )
 
 [node name="enemy30" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4250.35, 8216.92 )
-physics_material_override = SubResource( 31 )
+physics_material_override = SubResource( 34 )
 
 [node name="enemy31" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3706.69, 8803.49 )
-physics_material_override = SubResource( 32 )
+physics_material_override = SubResource( 35 )
 
 [node name="enemy32" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4235.56, 9633.13 )
-physics_material_override = SubResource( 33 )
+physics_material_override = SubResource( 36 )
 
 [node name="enemy33" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6395.88, 8668.98 )
-physics_material_override = SubResource( 34 )
+physics_material_override = SubResource( 37 )
 
 [node name="enemy34" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 7635.11, 8834.84 )
-physics_material_override = SubResource( 35 )
+physics_material_override = SubResource( 38 )
 
 [node name="enemy35" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 7555.25, 9128.94 )
-physics_material_override = SubResource( 36 )
+physics_material_override = SubResource( 39 )
 
 [node name="enemy36" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 7529.34, 9578.89 )
-physics_material_override = SubResource( 37 )
+physics_material_override = SubResource( 40 )
 
 [node name="enemy37" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 7642.44, 9757.96 )
-physics_material_override = SubResource( 38 )
+physics_material_override = SubResource( 41 )
 
 [node name="enemy38" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 7528.5, 10050.6 )
-physics_material_override = SubResource( 39 )
+physics_material_override = SubResource( 42 )
 
 [node name="enemy39" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8441.25, 4938.23 )
-physics_material_override = SubResource( 40 )
+physics_material_override = SubResource( 43 )
 
 [node name="enemy40" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8804.19, 5491.48 )
-physics_material_override = SubResource( 41 )
+physics_material_override = SubResource( 44 )
 
 [node name="enemy41" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8631.57, 6013.75 )
-physics_material_override = SubResource( 42 )
+physics_material_override = SubResource( 45 )
 
 [node name="enemy42" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 16173, 11795.3 )
-physics_material_override = SubResource( 43 )
+physics_material_override = SubResource( 46 )
 
 [node name="enemy43" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 16475.8, 11791.7 )
-physics_material_override = SubResource( 44 )
+physics_material_override = SubResource( 47 )
 
 [node name="enemy44" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 16778.6, 11788.1 )
-physics_material_override = SubResource( 45 )
+physics_material_override = SubResource( 48 )
 
 [node name="enemy45" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 17027.4, 11795.3 )
-physics_material_override = SubResource( 46 )
+physics_material_override = SubResource( 49 )
 
 [node name="enemy46" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 17225.6, 11798.9 )
-physics_material_override = SubResource( 47 )
+physics_material_override = SubResource( 50 )
 
 [node name="enemy47" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 17463.6, 11777.3 )
-physics_material_override = SubResource( 48 )
+physics_material_override = SubResource( 51 )
 
 [node name="enemy48" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 17640.2, 11766.5 )
-physics_material_override = SubResource( 49 )
+physics_material_override = SubResource( 52 )
 
 [node name="enemy49" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 18048.3, 11811.2 )
-physics_material_override = SubResource( 50 )
+physics_material_override = SubResource( 53 )
 
 [node name="enemy50" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 19129.4, 12046.9 )
-physics_material_override = SubResource( 51 )
+physics_material_override = SubResource( 54 )
 
 [node name="enemy51" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 19548.2, 12062.5 )
-physics_material_override = SubResource( 52 )
+physics_material_override = SubResource( 55 )
 
 [node name="enemy52" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 18043.2, 16296.2 )
-physics_material_override = SubResource( 53 )
+physics_material_override = SubResource( 56 )
 
 [node name="enemy53" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 20666.9, 17759.5 )
-physics_material_override = SubResource( 54 )
+physics_material_override = SubResource( 57 )
 
 [node name="enemy54" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 20322.1, 17788.9 )
-physics_material_override = SubResource( 55 )
+physics_material_override = SubResource( 58 )
 
 [node name="enemy55" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 20053, 17763.7 )
-physics_material_override = SubResource( 56 )
+physics_material_override = SubResource( 59 )
 
 [node name="enemy56" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 19771.3, 17780.5 )
-physics_material_override = SubResource( 57 )
+physics_material_override = SubResource( 60 )
 
 [node name="enemy57" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 19556.9, 17822.5 )
-physics_material_override = SubResource( 58 )
+physics_material_override = SubResource( 61 )
 
 [node name="enemy58" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 19233.1, 17906.6 )
-physics_material_override = SubResource( 59 )
+physics_material_override = SubResource( 62 )
 
 [node name="enemy59" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 18917.8, 17936.1 )
-physics_material_override = SubResource( 60 )
+physics_material_override = SubResource( 63 )
 
 [node name="enemy60" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8512.32, 7004.26 )
-physics_material_override = SubResource( 61 )
+physics_material_override = SubResource( 64 )
 
 [node name="enemy61" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8580.81, 8121.82 )
-physics_material_override = SubResource( 62 )
+physics_material_override = SubResource( 65 )
 
 [node name="enemy62" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8306.83, 8388.59 )
-physics_material_override = SubResource( 63 )
+physics_material_override = SubResource( 66 )
 
 [node name="enemy63" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9006.2, 8716.64 )
-physics_material_override = SubResource( 64 )
+physics_material_override = SubResource( 67 )
 
 [node name="enemy64" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9496.49, 8723.85 )
-physics_material_override = SubResource( 65 )
+physics_material_override = SubResource( 68 )
 
 [node name="enemy65" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8959.34, 9044.7 )
-physics_material_override = SubResource( 66 )
+physics_material_override = SubResource( 69 )
 
 [node name="enemy66" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9287.39, 8860.85 )
-physics_material_override = SubResource( 67 )
+physics_material_override = SubResource( 70 )
 
 [node name="enemy67" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9608.24, 9008.65 )
-physics_material_override = SubResource( 68 )
+physics_material_override = SubResource( 71 )
 
 [node name="enemy68" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9063.88, 9235.77 )
-physics_material_override = SubResource( 69 )
+physics_material_override = SubResource( 72 )
 
 [node name="enemy69" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8681.75, 9206.93 )
-physics_material_override = SubResource( 70 )
+physics_material_override = SubResource( 73 )
 
 [node name="enemy70" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9456.83, 9329.5 )
-physics_material_override = SubResource( 71 )
+physics_material_override = SubResource( 74 )
 
 [node name="enemy71" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9835.36, 9325.89 )
-physics_material_override = SubResource( 72 )
+physics_material_override = SubResource( 75 )
 
 [node name="enemy72" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8980.97, 9711.63 )
-physics_material_override = SubResource( 73 )
+physics_material_override = SubResource( 76 )
 
 [node name="enemy73" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9662.32, 9585.45 )
-physics_material_override = SubResource( 74 )
+physics_material_override = SubResource( 77 )
 
 [node name="enemy74" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 10668.1, 8713.04 )
-physics_material_override = SubResource( 75 )
+physics_material_override = SubResource( 78 )
 
 [node name="enemy75" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 11345.9, 8666.17 )
-physics_material_override = SubResource( 76 )
+physics_material_override = SubResource( 79 )
 
 [node name="enemy76" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 12081.3, 8673.38 )
-physics_material_override = SubResource( 77 )
+physics_material_override = SubResource( 80 )
 
 [node name="enemy77" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 12672.5, 8785.14 )
-physics_material_override = SubResource( 78 )
+physics_material_override = SubResource( 81 )
 
 [node name="enemy78" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 14511.1, 9264.61 )
-physics_material_override = SubResource( 79 )
+physics_material_override = SubResource( 82 )
 
 [node name="enemy79" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 15062.6, 9271.82 )
-physics_material_override = SubResource( 80 )
+physics_material_override = SubResource( 83 )
 
 [node name="enemy80" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 15156.4, 9556.61 )
-physics_material_override = SubResource( 81 )
+physics_material_override = SubResource( 84 )
 
 [node name="enemy81" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 14813.9, 9808.97 )
-physics_material_override = SubResource( 82 )
+physics_material_override = SubResource( 85 )
 
 [node name="enemy82" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 19174.2, 16262.6 )
-physics_material_override = SubResource( 83 )
+physics_material_override = SubResource( 86 )
 
 [node name="enemy83" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 18573, 16275.2 )
-physics_material_override = SubResource( 84 )
+physics_material_override = SubResource( 87 )
 
 [node name="enemy84" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 15228.5, 9881.07 )
-physics_material_override = SubResource( 85 )
+physics_material_override = SubResource( 88 )
 
 [node name="enemy85" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 21688.7, 15177.8 )
-physics_material_override = SubResource( 86 )
+physics_material_override = SubResource( 89 )
 
 [node name="enemy86" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 15844.9, 11802.5 )
-physics_material_override = SubResource( 87 )
+physics_material_override = SubResource( 90 )
 
 [node name="enemy87" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9121.37, 6310.21 )
-physics_material_override = SubResource( 88 )
+physics_material_override = SubResource( 91 )
 
 [node name="enemy88" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 21066.1, 17339.4 )
-physics_material_override = SubResource( 89 )
+physics_material_override = SubResource( 92 )
 
 [node name="enemy89" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 19195.7, 17505.3 )
-physics_material_override = SubResource( 90 )
+physics_material_override = SubResource( 93 )
 
 [node name="enemy90" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 15289, 19484.4 )
-physics_material_override = SubResource( 91 )
+physics_material_override = SubResource( 94 )
 
 [node name="enemy91" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 18606.5, 17934.3 )
-physics_material_override = SubResource( 92 )
+physics_material_override = SubResource( 95 )
 
 [node name="enemy92" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 18360.6, 17974.3 )
-physics_material_override = SubResource( 93 )
+physics_material_override = SubResource( 96 )
 
 [node name="enemy93" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 18154.7, 17991.5 )
-physics_material_override = SubResource( 94 )
+physics_material_override = SubResource( 97 )
 
 [node name="enemy94" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 17891.5, 18037.2 )
-physics_material_override = SubResource( 95 )
+physics_material_override = SubResource( 98 )
 
 [node name="enemy95" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 17674.2, 18083 )
-physics_material_override = SubResource( 96 )
+physics_material_override = SubResource( 99 )
 
 [node name="enemy96" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 17433.9, 18123 )
-physics_material_override = SubResource( 97 )
+physics_material_override = SubResource( 100 )
 
 [node name="enemy97" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 17165.1, 18134.5 )
-physics_material_override = SubResource( 98 )
+physics_material_override = SubResource( 101 )
 
 [node name="enemy98" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 16713.2, 18174.5 )
-physics_material_override = SubResource( 99 )
+physics_material_override = SubResource( 102 )
 
 [node name="enemy99" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 14608.3, 19547.3 )
-physics_material_override = SubResource( 100 )
+physics_material_override = SubResource( 103 )
 
 [node name="enemy100" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 14099.2, 19558.8 )
-physics_material_override = SubResource( 101 )
+physics_material_override = SubResource( 104 )
 
 [node name="enemy101" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 7493.21, 12121 )
-physics_material_override = SubResource( 102 )
+physics_material_override = SubResource( 105 )
 
 [node name="enemy102" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6609.04, 12018.6 )
-physics_material_override = SubResource( 103 )
+physics_material_override = SubResource( 106 )
 
 [node name="enemy103" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 5451.63, 12769.9 )
-physics_material_override = SubResource( 104 )
+physics_material_override = SubResource( 107 )
 
 [node name="enemy104" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 5519.94, 12261.4 )
-physics_material_override = SubResource( 105 )
+physics_material_override = SubResource( 108 )
 
 [node name="enemy105" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 5352.97, 11969.3 )
-physics_material_override = SubResource( 106 )
+physics_material_override = SubResource( 109 )
 
 [node name="enemy106" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 5113.9, 11696 )
-physics_material_override = SubResource( 107 )
+physics_material_override = SubResource( 110 )
 
 [node name="enemy107" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4301.82, 12147.6 )
-physics_material_override = SubResource( 108 )
+physics_material_override = SubResource( 111 )
 
 [node name="enemy108" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4890.01, 12143.8 )
-physics_material_override = SubResource( 109 )
+physics_material_override = SubResource( 112 )
 
 [node name="enemy109" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4715.45, 11608.7 )
-physics_material_override = SubResource( 110 )
+physics_material_override = SubResource( 113 )
 
 [node name="enemy110" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4404.28, 11616.3 )
-physics_material_override = SubResource( 111 )
+physics_material_override = SubResource( 114 )
 
 [node name="enemy111" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3967.88, 11753 )
-physics_material_override = SubResource( 112 )
+physics_material_override = SubResource( 115 )
 
 [node name="enemy112" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3804.71, 11980.6 )
-physics_material_override = SubResource( 113 )
+physics_material_override = SubResource( 116 )
 
 [node name="enemy113" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3592.2, 12219.7 )
-physics_material_override = SubResource( 114 )
+physics_material_override = SubResource( 117 )
 
 [node name="enemy114" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3702.25, 12481.5 )
-physics_material_override = SubResource( 115 )
+physics_material_override = SubResource( 118 )
 
 [node name="enemy115" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 3952.7, 12792.7 )
-physics_material_override = SubResource( 116 )
+physics_material_override = SubResource( 119 )
 
 [node name="enemy116" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 4332.18, 13339.2 )
-physics_material_override = SubResource( 117 )
+physics_material_override = SubResource( 120 )
 
 [node name="enemy117" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 5015.24, 13407.5 )
-physics_material_override = SubResource( 118 )
+physics_material_override = SubResource( 121 )
 
 [node name="enemy118" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6092.95, 13525.1 )
-physics_material_override = SubResource( 119 )
+physics_material_override = SubResource( 122 )
 
 [node name="enemy119" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 6851.9, 13509.9 )
-physics_material_override = SubResource( 120 )
+physics_material_override = SubResource( 123 )
 
 [node name="enemy120" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 7561.52, 13502.3 )
-physics_material_override = SubResource( 121 )
+physics_material_override = SubResource( 124 )
 
 [node name="enemy121" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8335.65, 13361.9 )
-physics_material_override = SubResource( 122 )
+physics_material_override = SubResource( 125 )
 
 [node name="enemy122" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9007.32, 13331.6 )
-physics_material_override = SubResource( 123 )
+physics_material_override = SubResource( 126 )
 
 [node name="enemy123" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9819.4, 13221.5 )
-physics_material_override = SubResource( 124 )
+physics_material_override = SubResource( 127 )
 
 [node name="enemy124" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 10346.9, 13179.8 )
-physics_material_override = SubResource( 125 )
+physics_material_override = SubResource( 128 )
 
 [node name="enemy125" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 10840.2, 13122.9 )
-physics_material_override = SubResource( 126 )
+physics_material_override = SubResource( 129 )
 
 [node name="enemy126" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 8172.92, 12069.3 )
-physics_material_override = SubResource( 127 )
+physics_material_override = SubResource( 130 )
 
 [node name="enemy127" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9989.39, 10718.5 )
-physics_material_override = SubResource( 128 )
+physics_material_override = SubResource( 131 )
 
 [node name="enemy128" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 10057.4, 11067.7 )
-physics_material_override = SubResource( 129 )
+physics_material_override = SubResource( 132 )
 
 [node name="enemy129" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 9936.85, 11364.5 )
-physics_material_override = SubResource( 130 )
+physics_material_override = SubResource( 133 )
 
 [node name="enemy130" parent="Enemies/Grounded Enemies" instance=ExtResource( 14 )]
 position = Vector2( 18842.3, 17767.4 )
@@ -1886,6 +1993,9 @@ position = Vector2( 8760.29, 9257.55 )
 
 [node name="Turrent11" parent="Turrets" instance=ExtResource( 15 )]
 position = Vector2( 19757.7, 15328.6 )
+
+[node name="Turrent" parent="." instance=ExtResource( 15 )]
+position = Vector2( 348.603, 1026.87 )
 [connection signal="on_pressed" from="Bridges and Buttons/Bridge1 and Button/Button" to="Bridges and Buttons/Bridge1 and Button/Bridge" method="destroy"]
 [connection signal="on_pressed" from="Bridges and Buttons/Bridge2 and Button/Button" to="Bridges and Buttons/Bridge2 and Button/Bridge" method="destroy"]
 [connection signal="on_pressed" from="Bridges and Buttons/Bridge3 and Button/Button" to="Bridges and Buttons/Bridge3 and Button/Bridge" method="destroy"]

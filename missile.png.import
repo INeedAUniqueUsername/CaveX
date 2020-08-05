@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/firework.png-6ac21c50ec66996321ca0e2cd350b099.stex"
+path="res://.import/missile.png-9c6f89690fe6aeb176fe3d4cfade499a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://firework.png"
-dest_files=[ "res://.import/firework.png-6ac21c50ec66996321ca0e2cd350b099.stex" ]
+source_file="res://missile.png"
+dest_files=[ "res://.import/missile.png-9c6f89690fe6aeb176fe3d4cfade499a.stex" ]
 
 [params]
 

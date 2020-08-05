@@ -91,6 +91,7 @@ func boost_wave_up():
 		var wave = wave_up.instance()
 		var pos = position + $wave_up_source.position
 		wave.position = pos
+		wave.creator = self
 		get_parent().call_deferred("add_child", wave)
 		wave.linear_velocity = Vector2(0, self.linear_velocity.y) + Vector2(0, 320)
 		add_collision_exception_with(wave)
@@ -100,6 +101,7 @@ func boost_wave_down():
 		var wave = wave_down.instance()
 		var pos = position + $wave_down_source.position
 		wave.position = pos
+		wave.creator = self
 		get_parent().call_deferred("add_child", wave)
 		wave.linear_velocity = Vector2(0, self.linear_velocity.y) + Vector2(0, -320)
 		add_collision_exception_with(wave)
@@ -109,6 +111,7 @@ func boost_wave_right():
 		var wave = wave_right.instance()
 		var pos = position + $wave_right_source.position
 		wave.position = pos
+		wave.creator = self
 		get_parent().call_deferred("add_child", wave)
 		wave.linear_velocity = Vector2(self.linear_velocity.x, 0) + Vector2(-320, 0)
 		add_collision_exception_with(wave)
@@ -118,6 +121,7 @@ func boost_wave_left():
 		var wave = wave_left.instance()
 		var pos = position + $wave_left_source.position
 		wave.position = pos
+		wave.creator = self
 		get_parent().call_deferred("add_child", wave)
 		wave.linear_velocity = Vector2(self.linear_velocity.x, 0) + Vector2(320, 0)
 		add_collision_exception_with(wave)

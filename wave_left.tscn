@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://wave_projectile.gd" type="Script" id=1]
-[ext_resource path="res://Left Bracket.png" type="Texture" id=2]
+[ext_resource path="res://wave.gd" type="Script" id=1]
+[ext_resource path="res://Down Bracket.png" type="Texture" id=2]
+[ext_resource path="res://Left Bracket.png" type="Texture" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -75,10 +76,10 @@ process_material = SubResource( 2 )
 texture = ExtResource( 2 )
 
 [node name="sprite" type="Sprite" parent="."]
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( 8.71537, -12.5453, 8.71537, -8.41627, -4.35045, 0.0680275, 8.8285, 7.93014, 9.05474, 12.6248, -8.81884, 2.38707, -9.10165, -2.59039 )
+polygon = PoolVector2Array( -8.87035, 2.85934, 9.06252, 12.5983, 9.0157, 8.2907, -5.82691, 0.0500126, 8.87523, -8.33114, 8.92205, -12.8261, -9.05763, -2.43156 )
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.5
@@ -86,6 +87,5 @@ one_shot = true
 
 [node name="anim" type="AnimationPlayer" parent="."]
 anims/shutdown = SubResource( 3 )
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="disable"]
+[connection signal="timeout" from="Timer" to="." method="decay"]

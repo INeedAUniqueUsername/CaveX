@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=2]
 
-[ext_resource path="res://wave_projectile.gd" type="Script" id=1]
+[ext_resource path="res://wave.gd" type="Script" id=1]
 [ext_resource path="res://Up Bracket.png" type="Texture" id=2]
 
 [sub_resource type="CanvasItemMaterial" id=1]
@@ -84,6 +84,5 @@ one_shot = true
 
 [node name="anim" type="AnimationPlayer" parent="."]
 anims/shutdown = SubResource( 3 )
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
-[connection signal="timeout" from="Timer" to="." method="disable"]
+[connection signal="timeout" from="Timer" to="." method="decay"]

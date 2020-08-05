@@ -15,17 +15,15 @@ func _on_grenade_body_entered(body):
 	fuse_countdown = true
 
 func _process(delta):
-	if not fuse_countdown:
-		return
-		
-	fuse -= 1
-	if fuse <= 0: 
-		for angle in ANGLES:
-			if rand_range(0, 2) != 2:
-				angle = angle + rand_range(0, 30)
-				var p = particle.instance()
-				var offset = Vector2(cos(PI * angle / 180), sin(PI * angle / 180));
-				p.position = position + offset * 8
-				p.linear_velocity = offset * rand_range(30*15, 30*30)
-				get_parent().call_deferred("add_child", p)
-		self.queue_free()
+	if fuse_countdown:
+		fuse -= 1
+		if fuse <= 0: 
+			for angle in ANGLES:
+				if rand_range(0, 2) != 2:
+					angle = angle + rand_range(0, 30)
+					var p = particle.instance()
+					var offset = Vector2(cos(PI * angle / 180), sin(PI * angle / 180));
+					p.position = position + offset * 8
+					p.linear_velocity = offset * rand_range(30*15, 30*30)
+					get_parent().call_deferred("add_child", p)
+			self.queue_free()
