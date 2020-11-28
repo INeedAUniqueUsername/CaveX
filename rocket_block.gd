@@ -1,8 +1,9 @@
 extends RigidBody2D
 
 const ANGLES = [ 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300 ]
-onready var particle = load("res://blast.tscn")
+onready var particle = load("res://Blast/blast.tscn")
 var active = false
+var ticks = 0;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,10 +11,20 @@ func _ready():
 var vel_prev = Vector2(0,0)
 func _integrate_forces(state):
 	if active:
-		linear_velocity += 20 * Vector2(cos(rotation-PI/2), sin(rotation-PI/2))
-	
+		linear_velocity += 20 * polar2cartesian(1, rotation-PI/2)
+		ticks += 1
+		if ticks%5 == 4:
+			var p = particle.instance()
+			var offset = polar2cartesian(1, rotation + PI/2)
+			p.position = position + offset * 30
+			p.linear_velocity = linear_velocity + offset * 150
+			p.add_collision_exception_with(self)
+			get_parent().call_deferred("add_child", p)
+			
+			
+		
 	var lv = linear_velocity
-	#Fall damage
+	#Explode on impact
 	var vDelta = abs(lv.length() - vel_prev.length()) / 30;
 	if(vDelta > 10):
 		for angle in ANGLES:

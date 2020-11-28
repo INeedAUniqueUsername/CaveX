@@ -2,8 +2,7 @@
 
 [ext_resource path="res://rocket_block.gd" type="Script" id=1]
 [ext_resource path="res://missile.png" type="Texture" id=2]
-[ext_resource path="res://Blast.png" type="Texture" id=3]
-
+[ext_resource path="res://Blast/Blast.png" type="Texture" id=3]
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1
@@ -29,12 +28,13 @@ position = Vector2( 0, -20 )
 texture = ExtResource( 2 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PoolVector2Array( -10.0354, -0.174059, -10.1014, -15.1495, 4.28029, -15.0835, 9.62394, -10.6634, 9.42602, -2.21916, 2.30116, 2.06895, 9.88782, 14.6694, 4.61014, 14.8673, -1.39321, 1.80507, -6.07715, 1.87104, -5.7473, 14.9993, -10.2333, 15.0652 )
+polygon = PoolVector2Array( -10.0354, -0.174059, -10.1014, -15.1495, 4.28029, -15.0835, 9.62394, -10.6634, 9.42602, -2.21916, 2.30115, 2.06897, 9.88782, 14.6694, 4.61014, 14.8673, -1.39321, 1.80507, -6.07715, 1.87104, -5.7473, 14.9993, -10.2333, 15.0652 )
 
 [node name="Particles2D" type="Particles2D" parent="."]
+visible = false
 material = SubResource( 1 )
+lifetime = 0.01
 speed_scale = 3.0
 process_material = SubResource( 2 )
 texture = ExtResource( 3 )
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

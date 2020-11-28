@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://HoverBomb/hover_bomb.gd" type="Script" id=1]
+[ext_resource path="res://HoverBomb/hover_bomb.png" type="Texture" id=2]
+
+[node name="hover_bomb" type="RigidBody2D"]
+contacts_reported = 3
+contact_monitor = true
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -7.95661, -15.775, 10.213, -15.3817, 9.97701, 14.7436, -7.95661, 14.5076 )
+
+[node name="floorcast" type="RayCast2D" parent="."]
+position = Vector2( 0.104988, 15.329 )
+enabled = true
+cast_to = Vector2( 0, 256 )
+[connection signal="body_entered" from="." to="." method="_on_grenade_body_entered"]

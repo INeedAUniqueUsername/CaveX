@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Grenadier/grenadier.gd" type="Script" id=1]
+[ext_resource path="res://HoverLauncher/hover_launcher.png" type="Texture" id=2]
+
+[node name="hover_launcher" type="RigidBody2D"]
+contacts_reported = 3
+contact_monitor = true
+script = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -10.1575, -14.2349, 11.1562, -14.1299, 10.7362, 15.0583, -10.0525, 15.0583 )
+[connection signal="body_entered" from="." to="." method="_on_grenadier_body_entered"]
