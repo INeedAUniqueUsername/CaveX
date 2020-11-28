@@ -2,3 +2,5 @@
 /XY.png
 /XY.png.import
 /export_presets.cfg
+/.import/*
+/Build/*
