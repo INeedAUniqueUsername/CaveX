@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Player/player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Barrel/barrel.tscn" type="PackedScene" id=2]
-[ext_resource path="res://Bridge.gd" type="Script" id=3]
+[ext_resource path="res://bridge.gd" type="Script" id=3]
 [ext_resource path="res://floor.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Lever/lever.tscn" type="PackedScene" id=5]
 [ext_resource path="res://background.tres" type="TileSet" id=6]

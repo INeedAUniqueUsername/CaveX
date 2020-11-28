@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://intro.gd" type="Script" id=1]
 
@@ -16,6 +16,9 @@ default_font = SubResource( 2 )
 bg_color = Color( 0, 0, 0, 1 )
 border_color = Color( 0, 0.180392, 1, 1 )
 corner_detail = 4
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.180392, 0.180392, 0.180392, 1 )
 
 [sub_resource type="DynamicFontData" id=5]
 font_path = "res://IBMPlexMono-Regular.ttf"
@@ -35,30 +38,59 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="."]
+[node name="Background" type="Label" parent="."]
 margin_left = 6.0
 margin_top = 2.0
 margin_right = 798.0
 margin_bottom = 477.0
 theme = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
-text = "X to the Y to the z
+align = 1
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-A platformer game for citrus hack 2019
-Available at x-to-the-y-to-the.xyz
+[node name="Title" type="Label" parent="."]
+margin_left = 6.0
+margin_top = 2.0
+margin_right = 798.0
+margin_bottom = 477.0
+theme = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = "
+Cave-X
 
-Alex Chen - creative lead
-Gery Juarez - level designer
-Yourui Xue - developer
+A pacifist platformer game by Alex \"Archcannon\" Chen
+
+
+
 
 Inspired by Cave Story and Lunar Lander
 (and also skyrim for some reason)
 
-
-"
+Use the arrow keys to move
+that is all"
 align = 1
-valign = 1
 uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Links" type="Label" parent="."]
+margin_left = 22.0
+margin_top = 135.0
+margin_right = 783.0
+margin_bottom = 222.0
+theme = SubResource( 3 )
+custom_styles/normal = SubResource( 8 )
+text = "Play at: https://arch.spongejr.com/cavex/CaveX.html
+GitHub:  https://github.com/INeedAUniqueUsername/CitrusHack2019
+please let me know if you have any feedback or suggestions"
+uppercase = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Button" type="Button" parent="."]
 margin_left = 76.95
@@ -68,15 +100,17 @@ margin_bottom = 455.95
 rect_pivot_offset = Vector2( 39, 7.19989 )
 theme = SubResource( 7 )
 text = "E[X]IT"
+flat = true
 
 [node name="Button2" type="Button" parent="."]
-margin_left = 345.8
-margin_top = 400.9
-margin_right = 489.8
-margin_bottom = 453.9
+margin_left = 325.0
+margin_top = 401.0
+margin_right = 490.0
+margin_bottom = 454.0
 rect_pivot_offset = Vector2( 39, 7.19989 )
 theme = SubResource( 7 )
 text = "PLA[Y]"
+flat = true
 
 [node name="Button3" type="Button" parent="."]
 margin_left = 579.5
@@ -86,6 +120,7 @@ margin_bottom = 451.05
 rect_pivot_offset = Vector2( 39, 7.19989 )
 theme = SubResource( 7 )
 text = "ABOUT[Z]"
+flat = true
 [connection signal="pressed" from="Button" to="." method="_exit"]
 [connection signal="pressed" from="Button2" to="." method="_play"]
 [connection signal="pressed" from="Button3" to="." method="_about"]
