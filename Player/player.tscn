@@ -1,8 +1,10 @@
 [gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Player/player.gd" type="Script" id=1]
-[ext_resource path="res://Player/X Atlas.png" type="Texture" id=2]
-[ext_resource path="res://Player/X Trail.png" type="Texture" id=7]
+[ext_resource path="res://Player/player_atlas.png" type="Texture" id=2]
+[ext_resource path="res://Player/player_trail.png" type="Texture" id=7]
+
+
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0

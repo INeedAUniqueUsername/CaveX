@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Down Bracket.png-e00972522912290f2b21734267d22196.stex"
+path="res://.import/player_right.png-46d6c2ceb1003a3c5fb3d0e87dcf3b91.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Down Bracket.png"
-dest_files=[ "res://.import/Down Bracket.png-e00972522912290f2b21734267d22196.stex" ]
+source_file="res://Player/player_right.png"
+dest_files=[ "res://.import/player_right.png-46d6c2ceb1003a3c5fb3d0e87dcf3b91.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/murmur_sprite.png-ab60026c79120bbedd71707a973f98c2.stex"
+path="res://.import/up_bracket.png-2b4d04d5859bce07925a7d0c4399b00d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Murmur/murmur_sprite.png"
-dest_files=[ "res://.import/murmur_sprite.png-ab60026c79120bbedd71707a973f98c2.stex" ]
+source_file="res://up_bracket.png"
+dest_files=[ "res://.import/up_bracket.png-2b4d04d5859bce07925a7d0c4399b00d.stex" ]
 
 [params]
 

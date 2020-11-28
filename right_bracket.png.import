@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/X Up.png-c16e83e938737cd06448fa1407afd9eb.stex"
+path="res://.import/right_bracket.png-c5fd908f3dc67c946808e6c610ff113b.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/X Up.png"
-dest_files=[ "res://.import/X Up.png-c16e83e938737cd06448fa1407afd9eb.stex" ]
+source_file="res://right_bracket.png"
+dest_files=[ "res://.import/right_bracket.png-c5fd908f3dc67c946808e6c610ff113b.stex" ]
 
 [params]
 

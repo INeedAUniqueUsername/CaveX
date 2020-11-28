@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Right Walkway.png-6b254d4bf6c5b54825668aa30cc71730.stex"
+path="res://.import/down_bracket.png-caf37a5a02d3d6b0b01215891a7fdd9a.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Right Walkway.png"
-dest_files=[ "res://.import/Right Walkway.png-6b254d4bf6c5b54825668aa30cc71730.stex" ]
+source_file="res://down_bracket.png"
+dest_files=[ "res://.import/down_bracket.png-caf37a5a02d3d6b0b01215891a7fdd9a.stex" ]
 
 [params]
 

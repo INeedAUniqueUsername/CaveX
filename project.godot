@@ -17,8 +17,8 @@ _global_script_class_icons={
 
 config/name="X to the Y to the Z"
 run/main_scene="res://intro.tscn"
-boot_splash/image="res://Splash.png"
-config/icon="res://Player/X.png"
+boot_splash/image="res://splash.png"
+config/icon="res://Player/player.png"
 
 [display]
 

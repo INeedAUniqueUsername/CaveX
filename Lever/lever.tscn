@@ -1,7 +1,12 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Button/Button.gd" type="Script" id=1]
-[ext_resource path="res://Button/Button.png" type="Texture" id=2]
+[ext_resource path="res://Lever/lever.gd" type="Script" id=1]
+[ext_resource path="res://Lever/lever.png" type="Texture" id=2]
+
+
+
+
+
 
 
 [node name="Button" type="RigidBody2D"]

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Up Bracket.png-adca36671ef10f59ae6ab78039d8a8c0.stex"
+path="res://.import/floater.png-355966572a5c8ef67cecbed0a9115a05.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Up Bracket.png"
-dest_files=[ "res://.import/Up Bracket.png-adca36671ef10f59ae6ab78039d8a8c0.stex" ]
+source_file="res://Floater/floater.png"
+dest_files=[ "res://.import/floater.png-355966572a5c8ef67cecbed0a9115a05.stex" ]
 
 [params]
 

@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Z.gd" type="Script" id=1]
-[ext_resource path="res://Z.png" type="Texture" id=2]
+[ext_resource path="res://z.gd" type="Script" id=1]
+[ext_resource path="res://z.png" type="Texture" id=2]
+
+
 
 [node name="Node2D" type="RigidBody2D"]
 mode = 2

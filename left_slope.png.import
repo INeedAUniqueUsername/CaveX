@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Left Bracket.png-10d1993aabcf2a15f12a0427dbd5cc52.stex"
+path="res://.import/left_slope.png-5290022ec3d613d61a5cf887f256a373.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Left Bracket.png"
-dest_files=[ "res://.import/Left Bracket.png-10d1993aabcf2a15f12a0427dbd5cc52.stex" ]
+source_file="res://left_slope.png"
+dest_files=[ "res://.import/left_slope.png-5290022ec3d613d61a5cf887f256a373.stex" ]
 
 [params]
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Right Slope.png-3644ad26c0bc6652c72b66926c108f9d.stex"
+path="res://.import/right_walkway.png-e6c7fc3ac6171ccc6856f301d1325c44.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Right Slope.png"
-dest_files=[ "res://.import/Right Slope.png-3644ad26c0bc6652c72b66926c108f9d.stex" ]
+source_file="res://right_walkway.png"
+dest_files=[ "res://.import/right_walkway.png-e6c7fc3ac6171ccc6856f301d1325c44.stex" ]
 
 [params]
 

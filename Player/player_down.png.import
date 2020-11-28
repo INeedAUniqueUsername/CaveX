@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Left Walkway.png-aa0245a4648681f376ebe04674a4e710.stex"
+path="res://.import/player_down.png-7d4b0462d9825cd7a8360e9e6dcd3977.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Left Walkway.png"
-dest_files=[ "res://.import/Left Walkway.png-aa0245a4648681f376ebe04674a4e710.stex" ]
+source_file="res://Player/player_down.png"
+dest_files=[ "res://.import/player_down.png-7d4b0462d9825cd7a8360e9e6dcd3977.stex" ]
 
 [params]
 

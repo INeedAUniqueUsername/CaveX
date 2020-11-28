@@ -1,7 +1,8 @@
 [gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Blast/blast.gd" type="Script" id=1]
-[ext_resource path="res://Blast/Blast.png" type="Texture" id=2]
+[ext_resource path="res://Blast/blast.png" type="Texture" id=2]
+
 
 
 

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Right Bracket.png-18bc89f649c707fff6825f6e52f84c97.stex"
+path="res://.import/fan.png-72e8c421ee0bdecd625495dda47536fd.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Right Bracket.png"
-dest_files=[ "res://.import/Right Bracket.png-18bc89f649c707fff6825f6e52f84c97.stex" ]
+source_file="res://Fan/fan.png"
+dest_files=[ "res://.import/fan.png-72e8c421ee0bdecd625495dda47536fd.stex" ]
 
 [params]
 

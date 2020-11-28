@@ -2,7 +2,8 @@
 
 [ext_resource path="res://rocket_block.gd" type="Script" id=1]
 [ext_resource path="res://missile.png" type="Texture" id=2]
-[ext_resource path="res://Blast/Blast.png" type="Texture" id=3]
+[ext_resource path="res://Blast/blast.png" type="Texture" id=3]
+
 
 [sub_resource type="CanvasItemMaterial" id=1]
 blend_mode = 1

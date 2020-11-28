@@ -1,8 +1,9 @@
 [gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Murmur/murmur.gd" type="Script" id=1]
-[ext_resource path="res://Floater/flying_enemy.png" type="Texture" id=2]
+[ext_resource path="res://Floater/floater.png" type="Texture" id=2]
 [ext_resource path="res://Bullet/bullet.png" type="Texture" id=3]
+
 
 [sub_resource type="PhysicsMaterial" id=1]
 friction = 0.0

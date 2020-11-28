@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/X Atlas.png-ea9d039568a28943f72e5c7a38b977c6.stex"
+path="res://.import/right_slope.png-26113c974f707ba1083414f1ffbf0cfb.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Player/X Atlas.png"
-dest_files=[ "res://.import/X Atlas.png-ea9d039568a28943f72e5c7a38b977c6.stex" ]
+source_file="res://right_slope.png"
+dest_files=[ "res://.import/right_slope.png-26113c974f707ba1083414f1ffbf0cfb.stex" ]
 
 [params]
 

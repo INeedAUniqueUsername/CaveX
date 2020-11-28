@@ -1,7 +1,12 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://WindFan/WindFan.gd" type="Script" id=1]
-[ext_resource path="res://WindFan/WindFan.png" type="Texture" id=2]
+[ext_resource path="res://Fan/fan.gd" type="Script" id=1]
+[ext_resource path="res://Fan/fan.png" type="Texture" id=2]
+
+
+
+
+
 
 [node name="WindFan" type="Node2D"]
 script = ExtResource( 1 )
