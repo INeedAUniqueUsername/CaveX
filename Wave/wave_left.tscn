@@ -1,8 +1,9 @@
 [gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://Wave/wave.gd" type="Script" id=1]
-[ext_resource path="res://down_bracket.png" type="Texture" id=2]
-[ext_resource path="res://left_bracket.png" type="Texture" id=3]
+[ext_resource path="res://Player/down_bracket.png" type="Texture" id=2]
+[ext_resource path="res://Player/left_bracket.png" type="Texture" id=3]
+
 
 
 

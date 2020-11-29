@@ -3,12 +3,7 @@
 [ext_resource path="res://Fan/fan.gd" type="Script" id=1]
 [ext_resource path="res://Fan/fan.png" type="Texture" id=2]
 
-
-
-
-
-
-[node name="WindFan" type="Node2D"]
+[node name="wind" type="Node2D"]
 script = ExtResource( 1 )
 interval = 0.2
 

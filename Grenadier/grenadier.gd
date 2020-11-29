@@ -11,8 +11,19 @@ export var angle_min = 30
 export var angle_max = 60
 export var throw_speed = 60 * 10
 
-const ANGLES = [ 0, 30, 60, 90, 120, 150, 180, 210, 240, 270, 300 ]
-onready var particle = load("res://Blast/blast.tscn")
+var particle = load("res://Blast/blast.tscn")
+const ANGLE_COUNT = 12
+const ANGLE_INTERVAL = 360 / ANGLE_COUNT
+func detonate():
+	for i in range(ANGLE_COUNT):
+		if rand_range(0, 2) != 2:
+			var angle = i * ANGLE_INTERVAL + rand_range(0, 30)
+			var p = particle.instance()
+			var offset = Vector2(cos(PI * angle / 180), sin(PI * angle / 180));
+			p.position = position + offset * 8
+			p.linear_velocity = offset * rand_range(300, 600)
+			get_parent().call_deferred("add_child", p)
+	self.queue_free()
 
 func _on_grenadier_body_entered(node):
 	#breakpoint
@@ -45,13 +56,5 @@ func _process(delta):
 	var lv = linear_velocity;
 	#Fall damage
 	if(abs(lv.length() - vel_prev.length()) / 30 > 15):
-		for angle in ANGLES:
-			angle = angle + rand_range(0, 30)
-			var p = particle.instance()
-			var offset = Vector2(cos(PI * angle / 180), sin(PI * angle / 180));
-			p.position = position + offset * 8
-			p.linear_velocity = offset * rand_range(30*15, 30*30)
-			get_parent().call_deferred("add_child", p)
-		
-		queue_free()
+		detonate()
 	vel_prev = lv;

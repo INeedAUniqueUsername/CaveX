@@ -3,13 +3,7 @@
 [ext_resource path="res://Lever/lever.gd" type="Script" id=1]
 [ext_resource path="res://Lever/lever.png" type="Texture" id=2]
 
-
-
-
-
-
-
-[node name="Button" type="RigidBody2D"]
+[node name="lever" type="RigidBody2D"]
 mode = 2
 contacts_reported = 3
 contact_monitor = true
@@ -25,5 +19,4 @@ polygon = PoolVector2Array( 1.78715, 0.399658, 2.27549, -11.687, 11.9204, -11.80
 [node name="ray" type="RayCast2D" parent="."]
 enabled = true
 cast_to = Vector2( 0, -16 )
-
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

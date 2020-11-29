@@ -4,9 +4,6 @@
 [ext_resource path="res://left_slope.png" type="Texture" id=2]
 [ext_resource path="res://right_slope.png" type="Texture" id=3]
 
-
-
-
 [node name="Node" type="Node"]
 
 [node name="Wall" type="Sprite" parent="."]
@@ -37,4 +34,3 @@ mode = 3
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Right Slope/KinematicBody2D"]
 polygon = PoolVector2Array( -12, -16, 16, 16, 12, 16, -16, -16 )
-

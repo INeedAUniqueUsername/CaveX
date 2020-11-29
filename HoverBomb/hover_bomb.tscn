@@ -17,5 +17,5 @@ polygon = PoolVector2Array( -7.95661, -15.775, 10.213, -15.3817, 9.97701, 14.743
 [node name="floorcast" type="RayCast2D" parent="."]
 position = Vector2( 0.104988, 15.329 )
 enabled = true
-cast_to = Vector2( 0, 256 )
+cast_to = Vector2( 0, 320 )
 [connection signal="body_entered" from="." to="." method="_on_grenade_body_entered"]

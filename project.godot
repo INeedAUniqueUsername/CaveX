@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="CaveX"
-run/main_scene="res://intro.tscn"
+run/main_scene="res://Intro/intro.tscn"
 boot_splash/image="res://splash.png"
 config/icon="res://Player/player.png"
 

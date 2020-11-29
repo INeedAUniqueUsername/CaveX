@@ -25,7 +25,7 @@ extends RigidBody2D
 #  for moving platforms.
 
 # Member variables
-var gib = load("res://Gib.tscn")
+var gib = load("res://Player/gib.tscn")
 
 var anim = ""
 var siding_left = false

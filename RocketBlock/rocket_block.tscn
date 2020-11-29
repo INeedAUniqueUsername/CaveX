@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://RocketBlock/rocket_block.gd" type="Script" id=1]
+[ext_resource path="res://RocketBlock/rocket_block.png" type="Texture" id=2]
+
+[node name="rocket_block" type="RigidBody2D"]
+gravity_scale = 0.2
+contacts_reported = 3
+contact_monitor = true
+script = ExtResource( 1 )
+
+[node name="Propulsion" type="Node2D" parent="."]
+position = Vector2( 0, -20 )
+
+[node name="Sprite" type="Sprite" parent="."]
+texture = ExtResource( 2 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PoolVector2Array( -10.0354, -0.174059, -10.1014, -15.1495, 4.28029, -15.0835, 9.62394, -10.6634, 9.42602, -2.21916, 2.30115, 2.06897, 9.88782, 14.6694, 4.61014, 14.8673, -1.39321, 1.80507, -6.07715, 1.87104, -5.7473, 14.9993, -10.2333, 15.0652 )
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
