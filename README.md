@@ -1,5 +1,5 @@
 # CaveX
 
-![](CaveX_Preview.png]
+![](CaveX_Preview.png)
 
 Platforming game with lots of explosions
